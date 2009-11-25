@@ -15,12 +15,15 @@ def get_last_day_of_month(year, month):
     return date(year, month, 1) - timedelta(1)
 
 
-def month_cal(event_list, year, month):
+def month_cal(year, month):
+
     first_day_of_month = date(year, month, 1)
     last_day_of_month = get_last_day_of_month(year, month)
     first_day_of_calendar = first_day_of_month - timedelta(first_day_of_month.isoweekday())
     last_day_of_calendar = last_day_of_month + timedelta(7 - last_day_of_month.isoweekday())
     today = date.today();
+
+    event_list = Event.objects.filter (start_time__gte=first_day_of_calendar,end_time__lte=last_day_of_calendar,moderated=True)
 
     month_cal = []
     week = []
