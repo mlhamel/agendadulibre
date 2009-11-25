@@ -69,8 +69,9 @@ class ICalendarFeed(object):
 class UpcomingEventCalendar(ICalendarFeed):
 
     def items(self):
-        today = date.today() - timedelta (days=30)
-        return Event.objects.filter(moderated=True,start_time__gte=today)
+        start = date.today() - timedelta (days=30)
+        end = date.today() + timedelta (days=60)
+        return Event.objects.filter(moderated=True,start_time__gte=start,start_time__lte=end)
 
     def item_uid(self, item):
         return str(item.id)
