@@ -24,6 +24,12 @@ class City (models.Model):
     return self.name
 
 class Event (models.Model):
+  SCOPE = (
+      ('L', 'Locale'),
+      ('N', 'Nationale'),
+      ('I', 'Internationale'),
+  )
+
   title = models.CharField (max_length=200,
       verbose_name="titre",
       help_text="Décrivez en moins de 5 mots votre évènement, sans y indiquer le lieu, la ville ou la date.")
@@ -36,9 +42,17 @@ Veillez à utiliser les balises <p> pour formater les paragraphes, et non la bal
       verbose_name="site web",
       help_text="Lien direct vers une page donnant plus d'informations sur l'évènement (lieu précis, horaire précis, programme précis...)")
   start_time = models.DateTimeField (
-      verbose_name="Début")
+      verbose_name="Début",
+      help_text="AAAA-MM-JJ HH:MM")
   end_time = models.DateTimeField (
-      verbose_name="Fin")
+      verbose_name="Fin",
+      help_text="AAAA-MM-JJ HH:MM")
+  scope = models.CharField(max_length=1,
+      choices=SCOPE,
+      verbose_name="portée",
+      default ='L',
+      help_text="Indiquez si l'évènement s'adresse à un publique local, national ou international.")
+
   submission_time = models.DateTimeField (auto_now_add=True);
   updated_time = models.DateTimeField (auto_now=True);
 
