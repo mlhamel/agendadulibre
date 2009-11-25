@@ -3,6 +3,7 @@ from agenda.events.models import Event, City, Region
 
 class EventAdmin(admin.ModelAdmin):
     date_hierarchy = 'start_time'
+    list_filter = ('moderated',)
 
 class CityAdmin(admin.ModelAdmin):
     list_filter = ('region',)
