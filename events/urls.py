@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.views.generic import list_detail
 from django.views.generic.simple import direct_to_template
 from agenda.events.models import Event
-from agenda.events.feeds import LatestEntries, UpcomingEntries, UpcomingEventCalendar
+from agenda.events.feeds import LatestEntries, UpcomingEntries, UpcomingEventCalendar, LatestEntriesByRegion, UpcomingEntriesByRegion
 
 
 general_info = {
@@ -19,7 +19,9 @@ event_list_info = dict(general_info, **list_info)
 
 feeds = {
     'latest': LatestEntries,
+    'latest_region': LatestEntriesByRegion,
     'upcoming': UpcomingEntries,
+    'upcoming_region': UpcomingEntriesByRegion,
 }
 
 

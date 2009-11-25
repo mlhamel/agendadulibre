@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.syndication.feeds import Feed
-from agenda.events.models import Event
+from agenda.events.models import Event, Region
 from django.utils.feedgenerator import Rss201rev2Feed
 from datetime import date, timedelta
 import vobject
-
+from django.contrib.syndication.feeds import FeedDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from django.db.models import Q
 
 EVENT_ITEMS = (
     ('uid', 'uid'),
@@ -99,6 +101,30 @@ class LatestEntries(Feed):
     def item_pubdate(self, item):
         return item.start_time
 
+class LatestEntriesByRegion(LatestEntries):
+    link = "/event/"
+
+    def title(self, obj):
+        return u"Agendadulibre.qc.ca: Nouveaux évènements pour %s (Québec)" % obj[0].name
+
+    def description(self, obj):
+        return u"Évènements relatif aux logiciels libre récemment ajouté pour %s (Québec) et à plus grande portée" % obj[0].name
+
+    def get_object(self, params):
+        if len(params) != 1:
+            raise ObjectDoesNotExist
+
+        return Region.objects.filter(pk=params[0])
+
+    def items(self, region):
+        if region != None:
+          print region
+          q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
+        else:
+          q = Q()
+
+        return Event.objects.filter(q).filter(moderated=True).order_by('-submission_time')[:10]
+
 
 class UpcomingEntries(LatestEntries):
     title = "Agendadulibre.qc.ca prochains évenements"
@@ -107,7 +133,28 @@ class UpcomingEntries(LatestEntries):
 
     def items(self):
         today = date.today ()
-        return Event.objects.filter(moderated=True,start_time__gte=today).order_by('-start_time')[:10]
+        return Event.objects.filter(moderated=True,start_time__gte=today).order_by('start_time')[:10]
 
-    def item_pubdate(self, item):
-        return item.start_time
+class UpcomingEntriesByRegion(UpcomingEntries):
+    link = "/event/"
+
+    def title(self, obj):
+        return u"Agendadulibre.qc.ca: Évènements à venir pour %s (Québec)" % obj[0].name
+
+    def description(self, obj):
+        return u"Évènements relatif aux logiciels libre à venir pour %s (Québec) et à plus grande portée" % obj[0].name
+
+    def get_object(self, params):
+        if len(params) != 1:
+            raise ObjectDoesNotExist
+
+        return Region.objects.filter(pk__exact=params[0])
+
+    def items(self, region):
+        if region != None:
+          print region
+          q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
+        else:
+          q = Q()
+
+        return Event.objects.filter(q).filter(moderated=True).order_by('start_time')[:10]
