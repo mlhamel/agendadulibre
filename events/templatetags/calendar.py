@@ -3,6 +3,7 @@ from datetime import date, timedelta
 
 from django import template
 from agenda.events.models import Event
+from django.db.models import Q
 
 register = template.Library()
 
@@ -15,7 +16,7 @@ def get_last_day_of_month(year, month):
     return date(year, month, 1) - timedelta(1)
 
 
-def month_cal(year, month):
+def month_cal(year, month, region = None):
 
     first_day_of_month = date(year, month, 1)
     last_day_of_month = get_last_day_of_month(year, month)
@@ -23,7 +24,16 @@ def month_cal(year, month):
     last_day_of_calendar = last_day_of_month + timedelta(7 - last_day_of_month.isoweekday())
     today = date.today();
 
-    event_list = Event.objects.filter (start_time__gte=first_day_of_calendar,end_time__lte=last_day_of_calendar,moderated=True)
+    # Filter local events for given region, include national and international events
+    if region != None:
+      q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
+    else:
+      q = Q()
+
+    event_list = Event.objects.filter (
+        start_time__gte=first_day_of_calendar,
+        end_time__lte=last_day_of_calendar,
+        moderated=True).filter (q)
 
     month_cal = []
     week = []

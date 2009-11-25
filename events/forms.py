@@ -1,6 +1,6 @@
 # -*- encoding:utf-8 -*-
 from django import forms
-from events.models import Event, City
+from events.models import Event, City, Region
 from django.forms.util import ErrorList
 from datetime import datetime
 
@@ -32,3 +32,8 @@ class EventForm(forms.ModelForm):
         del cleaned_data["start_time"]
 
       return cleaned_data
+
+class RegionFilterForm (forms.Form):
+    region = forms.ModelChoiceField(Region.objects.all(), empty_label="Toutes les régions", required=False, label="Région",
+        widget=forms.Select(attrs={'onchange':'document.getElementById("filter").submit();'}))
+
