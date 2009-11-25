@@ -32,8 +32,8 @@ class Event (models.Model):
 
   address = models.CharField (max_length=200)
   city = models.ForeignKey(City)
-  latitude = models.FloatField ()
-  longitude = models.FloatField ()
+  latitude = models.FloatField (blank=True)
+  longitude = models.FloatField (blank=True)
 
   contact = models.CharField (max_length=200)
   contact_email = models.EmailField (max_length=200)
