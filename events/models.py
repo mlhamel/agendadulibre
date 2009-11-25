@@ -11,13 +11,15 @@ class Region (models.Model):
 class City (models.Model):
   class Meta:
     verbose_name_plural = "cities"
+    ordering = ['name']
+
   name = models.CharField (max_length=200)
   region = models.ForeignKey(Region)
   latitude = models.FloatField ()
   longitude = models.FloatField ()
 
   def __unicode__ (self):
-    return self.name + " (" + self.region.name + ")"
+    return self.name
 
 class Event (models.Model):
   title = models.CharField (max_length=200)
