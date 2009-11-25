@@ -40,10 +40,10 @@ class Event (models.Model):
 
   submitter = models.ForeignKey(User, related_name="submitted_events")
 
-  moderator = models.ForeignKey(User, blank=True, related_name="moderated_events")
+  moderator = models.ForeignKey(User, blank=True, null=True, related_name="moderated_events")
   moderated = models.BooleanField (default=False)
   submitter = models.ForeignKey(User)
-  decision_time = models.DateTimeField (blank=True);
+  decision_time = models.DateTimeField (blank=True,null=True);
 
   def __unicode__ (self):
     return self.title
