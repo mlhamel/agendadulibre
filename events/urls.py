@@ -32,7 +32,7 @@ urlpatterns = patterns('',
     (r'^(?P<object_id>\d+)/$', list_detail.object_detail, event_info),
     url(r'^(?P<year>\d+)/(?P<month>\d+)/$', 'events.views.month', name="month_view"),
 
-    (r'^feeds/$', direct_to_template, {'template': 'events/feeds.html'}),
+    (r'^feeds/$', 'events.views.feed_list'),
     (r'^feeds/icalendar/$', UpcomingEventCalendar()),
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds}),

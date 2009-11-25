@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 from django.shortcuts import render_to_response, HttpResponseRedirect
 from events.forms import EventForm, RegionFilterForm
+from events.models import Region
 
 def propose (request):
   form = EventForm (request)
@@ -15,6 +16,14 @@ def propose (request):
 
   return render_to_response('events/event_new.html', {
     'form': form,
+    })
+
+def feed_list (request):
+
+  region_list = Region.objects.all()
+
+  return render_to_response('events/feeds.html', {
+    'region_list': region_list,
     })
 
 def month (request, year, month):
