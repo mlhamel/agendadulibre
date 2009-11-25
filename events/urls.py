@@ -16,6 +16,7 @@ month_list_info = {
     "month_format": "%m",
     "date_field": "start_time",
     "allow_future": True,
+    "allow_empty": True,
 }
 
 event_info = general_info
