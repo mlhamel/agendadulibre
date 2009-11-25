@@ -65,3 +65,9 @@ Veillez à utiliser les balises <p> pour formater les paragraphes, et non la bal
   def __unicode__ (self):
     return self.title
 
+  def get_absolute_url (self):
+    return "/event/%i/" % self.id
+
+
+
+
