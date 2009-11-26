@@ -33,6 +33,8 @@ urlpatterns = patterns('',
     (r'^(?P<object_id>\d+)/$', list_detail.object_detail, event_info),
     url(r'^(?P<year>\d+)/(?P<month>\d+)/$', 'events.views.month', name="month_view"),
 
+    (r'^stats/$', 'events.views.stats'),
+
     (r'^feeds/$', 'events.views.feed_list'),
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds}),

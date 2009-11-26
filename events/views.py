@@ -2,8 +2,10 @@ from datetime import date, timedelta
 from django.shortcuts import render_to_response, HttpResponseRedirect
 from django.http import HttpResponseNotFound
 from events.forms import EventForm, RegionFilterForm
-from events.models import Region
+from events.models import Region, Event
 from agenda.events.feeds import UpcomingEventCalendarByRegion
+from django.db.models import Count
+
 
 def propose (request):
   form = EventForm (request)
@@ -19,6 +21,26 @@ def propose (request):
   return render_to_response('events/event_new.html', {
     'form': form,
     })
+
+
+def stats (request):
+  total = Event.objects.filter(moderated=True).aggregate(Count('id'))['id__count']
+  total_to_moderate = Event.objects.filter(moderated=False).aggregate(Count('id'))['id__count']
+
+  region_list = []
+  regions = Region.objects.all()
+  for region in regions:
+     region_list.append ({
+       'name': region.name,
+       'value': Event.objects.filter(moderated=True,city__region=region).aggregate(Count('id'))['id__count']
+       })
+
+  return render_to_response('events/stats.html', {
+    'region_list': region_list,
+    'total': total,
+    'total_to_moderate': total_to_moderate,
+    })
+
 
 def feed_list (request):
 
