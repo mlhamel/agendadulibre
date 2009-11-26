@@ -1,3 +1,5 @@
+# -*- encoding:utf-8 -*-
+
 from datetime import date, timedelta
 from django.shortcuts import render_to_response, HttpResponseRedirect
 from django.http import HttpResponseNotFound
@@ -5,6 +7,7 @@ from events.forms import EventForm, RegionFilterForm
 from events.models import Region, Event
 from agenda.events.feeds import UpcomingEventCalendarByRegion
 from django.db.models import Count
+from django.core.mail import mail_admins
 
 
 def propose (request):
@@ -13,7 +16,11 @@ def propose (request):
   if request.method == 'POST':
     form = EventForm(request.POST)
     if form.is_valid():
-      form.save()
+      e = form.save()
+      msg = u"Bonjour, \n\nLe nouvel évènement '" + e.title + u"' a été soumis.  Pour le réviser, veuillez visiter\n"
+      msg += u"http://www.agendadulibre.qc.ca/event/%d/" % e.id
+      msg += u"\n\nMerci,\n\nL'Agenda du libre du Québec"
+      mail_admins (u"Nouvel évènement en attente de modération", msg)
       return HttpResponseRedirect('/event/new/thanks/')
   else:
     form = EventForm()
