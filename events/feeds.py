@@ -148,7 +148,12 @@ class LatestEntriesByRegion(LatestEntries):
         if len(params) != 1:
             raise ObjectDoesNotExist
 
-        return Region.objects.filter(pk=params[0])
+        r = Region.objects.filter(pk__exact=params[0])
+
+        if r:
+            return r
+        else:
+            raise ObjectDoesNotExist
 
     def items(self, region):
         if region != None:
@@ -182,7 +187,12 @@ class UpcomingEntriesByRegion(UpcomingEntries):
         if len(params) != 1:
             raise ObjectDoesNotExist
 
-        return Region.objects.filter(pk__exact=params[0])
+        r = Region.objects.filter(pk__exact=params[0])
+
+        if r:
+            return r
+        else:
+            raise ObjectDoesNotExist
 
     def items(self, region):
         if region != None:
