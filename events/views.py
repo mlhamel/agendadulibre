@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from django.shortcuts import render_to_response, HttpResponseRedirect
+from django.http import HttpResponseNotFound
 from events.forms import EventForm, RegionFilterForm
 from events.models import Region
 from agenda.events.feeds import UpcomingEventCalendarByRegion
@@ -28,7 +29,10 @@ def feed_list (request):
     })
 
 def calendar_region (request, region_id):
-  region = Region.objects.get(pk=region_id)
+  try:
+    region = Region.objects.get(pk=region_id)
+  except Region.DoesNotExist:
+    return HttpResponseNotFound ()
   callable = UpcomingEventCalendarByRegion (region)
 
   return callable (request)
