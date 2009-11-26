@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.views.generic import list_detail
 from django.views.generic.simple import direct_to_template
 from agenda.events.models import Event
-from agenda.events.feeds import LatestEntries, UpcomingEntries, UpcomingEventCalendar, LatestEntriesByRegion, UpcomingEntriesByRegion
+from agenda.events.feeds import LatestEntries, UpcomingEntries, UpcomingEventCalendar, LatestEntriesByRegion, UpcomingEntriesByRegion, UpcomingEventCalendarByRegion
 
 
 general_info = {
@@ -32,12 +32,11 @@ urlpatterns = patterns('',
     (r'^(?P<object_id>\d+)/$', list_detail.object_detail, event_info),
     url(r'^(?P<year>\d+)/(?P<month>\d+)/$', 'events.views.month', name="month_view"),
 
+    (r'^calendar_region/(?P<region_id>\d+)/$', 'events.views.calendar_region'),
     (r'^feeds/$', 'events.views.feed_list'),
-    (r'^feeds/icalendar/$', UpcomingEventCalendar()),
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds}),
-
-
+    (r'^calendar/$', UpcomingEventCalendar()),
 
 )
 

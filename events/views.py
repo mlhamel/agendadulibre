@@ -2,6 +2,7 @@ from datetime import date, timedelta
 from django.shortcuts import render_to_response, HttpResponseRedirect
 from events.forms import EventForm, RegionFilterForm
 from events.models import Region
+from agenda.events.feeds import UpcomingEventCalendarByRegion
 
 def propose (request):
   form = EventForm (request)
@@ -25,6 +26,13 @@ def feed_list (request):
   return render_to_response('events/feeds.html', {
     'region_list': region_list,
     })
+
+def calendar_region (request, region_id):
+  region = Region.objects.get(pk=region_id)
+  callable = UpcomingEventCalendarByRegion (region)
+
+  return callable (request)
+
 
 def month (request, year, month):
   month = date(int(year), int(month), 1)

@@ -68,12 +68,46 @@ class ICalendarFeed(object):
     def item_created(self, item):
         pass
 
+
 class UpcomingEventCalendar(ICalendarFeed):
 
     def items(self):
         start = date.today() - timedelta (days=30)
         end = date.today() + timedelta (days=60)
         return Event.objects.filter(moderated=True,start_time__gte=start,start_time__lte=end)
+
+    def item_uid(self, item):
+        return str(item.id)
+
+    def item_start(self, item):
+        return item.start_time
+
+    def item_end(self, item):
+        return item.end_time
+
+    def item_location(self, item):
+        return item.address + ", " + item.city.name + ", " + item.city.region.name
+
+    def item_description(self, item):
+        return item.description
+
+
+class UpcomingEventCalendarByRegion (ICalendarFeed):
+
+    def __init__(self, region):
+        self.region = region
+
+    def items(self):
+        start = date.today() - timedelta (days=30)
+        end = date.today() + timedelta (days=60)
+
+        if self.region != None:
+          print self.region
+          q = Q(city__region=self.region,scope="L") | Q(scope="I") | Q(scope="N")
+        else:
+          q = Q()
+
+        return Event.objects.filter(q).filter(moderated=True,start_time__gte=start,start_time__lte=end)
 
     def item_uid(self, item):
         return str(item.id)
