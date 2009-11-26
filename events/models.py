@@ -12,7 +12,7 @@ class Region (models.Model):
 
 class City (models.Model):
   class Meta:
-    verbose_name_plural = "cities"
+    verbose_name = "ville"
     ordering = ['name']
 
   name = models.CharField (max_length=200)
@@ -24,6 +24,9 @@ class City (models.Model):
     return self.name
 
 class Event (models.Model):
+  class Meta:
+    verbose_name = "évènement"
+
   SCOPE = (
       ('L', 'Locale'),
       ('N', 'Nationale'),
