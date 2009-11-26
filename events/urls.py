@@ -29,14 +29,16 @@ urlpatterns = patterns('',
     (r'^$', list_detail.object_list, event_list_info),
     (r'^new/$', 'events.views.propose'),
     (r'^new/thanks/$', direct_to_template, {'template': 'events/event_thanks.html'}),
+
     (r'^(?P<object_id>\d+)/$', list_detail.object_detail, event_info),
     url(r'^(?P<year>\d+)/(?P<month>\d+)/$', 'events.views.month', name="month_view"),
 
-    (r'^calendar_region/(?P<region_id>\d+)/$', 'events.views.calendar_region'),
     (r'^feeds/$', 'events.views.feed_list'),
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds}),
+
     (r'^calendar/$', UpcomingEventCalendar()),
+    (r'^calendar_region/(?P<region_id>\d+)/$', 'events.views.calendar_region'),
 
 )
 
