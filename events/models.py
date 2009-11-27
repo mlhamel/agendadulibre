@@ -59,9 +59,14 @@ Veillez à utiliser les balises <p> pour formater les paragraphes, et non la bal
   submission_time = models.DateTimeField (auto_now_add=True);
   updated_time = models.DateTimeField (auto_now=True);
 
+  venue = models.CharField (max_length=200,
+      blank=True,
+      verbose_name="Nom de l'endroit",
+      help_text="Optionel. Nom de l'endroit où se déroule l'évènement, example: Pub chez Moe"
+      )
   address = models.CharField (max_length=200,
       verbose_name="Addresse",
-      help_text="Numéro de porte et nom de rue de l'endroit"
+      help_text="Numéro de porte et nom de rue de l'endroit, et le local"
       )
   city = models.ForeignKey(City,
       verbose_name="Ville")
