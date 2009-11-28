@@ -86,7 +86,7 @@ class UpcomingEventCalendar(ICalendarFeed):
         return item.end_time
 
     def item_location(self, item):
-        return item.address + ", " + item.city.name + ", " + item.city.region.name
+        return item.address + ", " + item.city.name + u", Québec"
 
     def item_description(self, item):
         return item.description
