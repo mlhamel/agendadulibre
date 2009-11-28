@@ -1,0 +1,13 @@
+How to install Agenda
+=====================
+
+1. Configure a database.
+
+2. Make a copy of settings.py.template as settings.py
+   and change the database access credentials.
+
+3. Run manager.py syncdb
+   It will install the database and the cities and regions
+   for Québec by default.
+
+4. Setup your http server.
