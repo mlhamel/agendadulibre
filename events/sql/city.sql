@@ -132,7 +132,7 @@ INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Colombie
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Compton", 5, 45.242348, -71.826975);
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Contrecoeur", 16, 45.857542, -73.238718);
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Cookshire-Eaton", 5, 45.283615, -71.772156);
-INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("9-du-Golfe-du-Saint-Laurent", 9, 50.464056, -59.64173);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Côte-Nord-du-Golfe-du-Saint-Laurent", 9, 50.464056, -59.64173);
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Côte-Saint-Luc", 6, 45.467182, -73.667625);
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Coteau-du-Lac", 16, 45.29164, -74.174717);
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Coucoucache", 4, 47.751012, -73.232757);
