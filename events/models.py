@@ -57,8 +57,8 @@ class Event (models.Model):
   description = models.TextField (
       verbose_name="Description",
       help_text="""Décrivez de la manière la plus complète possible votre évènement.
-Les balises HTML autorisées sont <p>, <b>, <i>, <ul>, <ol>, <li>, <br/>, <a>. Merci d'utiliser ces balises pour formater la description de votre évènement.
-Veillez à utiliser les balises <p> pour formater les paragraphes, et non la balise <br/>.""")
+Les balises HTML autorisées sont &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;br/&gt;, &lt;a&gt;. Utilisez &lt;h3&gt; jusqu'à &lt;h5&gt; pour diviser votre texte au besoin. Merci d'utiliser ces balises pour formater la description de votre évènement.
+Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non la balise &lt;br/&gt;.""")
   url = models.URLField (
       verbose_name="site web",
       help_text="Lien direct vers une page donnant plus d'informations sur l'évènement (lieu précis, horaire précis, programme précis...)")
