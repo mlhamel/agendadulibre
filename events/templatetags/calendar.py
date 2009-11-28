@@ -55,7 +55,7 @@ def month_cal(year, month, region = None):
     event_list = Event.objects.filter (
         start_time__gte=first_day_of_calendar,
         end_time__lte=last_day_of_calendar,
-        moderated=True).filter (q)
+        moderated=True).filter (q).order_by ('city__region__name')
 
     month_cal = []
     week = []
@@ -91,6 +91,6 @@ def month_cal(year, month, region = None):
         i += 1
         day += timedelta(1)
 
-    return {'calendar': month_cal, 'headers': week_headers}
+    return {'calendar': month_cal, 'headers': week_headers, 'region': region}
 
 register.inclusion_tag('calendar.html')(month_cal)
