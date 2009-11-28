@@ -62,10 +62,10 @@ Veillez à utiliser les balises <p> pour formater les paragraphes, et non la bal
   venue = models.CharField (max_length=200,
       blank=True,
       verbose_name="Nom de l'endroit",
-      help_text="Optionel. Nom de l'endroit où se déroule l'évènement, example: Pub chez Moe"
+      help_text="Optionnel. Nom de l'endroit où se déroule l'évènement, example: Pub chez Moe"
       )
   address = models.CharField (max_length=200,
-      verbose_name="Addresse",
+      verbose_name="Adresse",
       help_text="Numéro de porte et nom de rue de l'endroit, et le local"
       )
   city = models.ForeignKey(City,
