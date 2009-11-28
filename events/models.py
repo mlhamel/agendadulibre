@@ -43,7 +43,7 @@ class City (models.Model):
 
 class Event (models.Model):
   class Meta:
-    verbose_name = "évènement"
+    verbose_name = "événement"
 
   SCOPE = (
       ('L', 'Locale'),
@@ -53,15 +53,15 @@ class Event (models.Model):
 
   title = models.CharField (max_length=200,
       verbose_name="titre",
-      help_text="Décrivez en moins de 5 mots votre évènement, sans y indiquer le lieu, la ville ou la date.")
+      help_text="Décrivez en moins de 5 mots votre événement, sans y indiquer le lieu, la ville ou la date.")
   description = models.TextField (
       verbose_name="Description",
-      help_text="""Décrivez de la manière la plus complète possible votre évènement.
-Les balises HTML autorisées sont &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;br/&gt;, &lt;a&gt;. Utilisez &lt;h3&gt; jusqu'à &lt;h5&gt; pour diviser votre texte au besoin. Merci d'utiliser ces balises pour formater la description de votre évènement.
+      help_text="""Décrivez de la manière la plus complète possible votre événement.
+Les balises HTML autorisées sont &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;br/&gt;, &lt;a&gt;. Utilisez &lt;h3&gt; jusqu'à &lt;h5&gt; pour diviser votre texte au besoin. Merci d'utiliser ces balises pour formater la description de votre événement.
 Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non la balise &lt;br/&gt;.""")
   url = models.URLField (
       verbose_name="site web",
-      help_text="Lien direct vers une page donnant plus d'informations sur l'évènement (lieu précis, horaire précis, programme précis...)")
+      help_text="Lien direct vers une page donnant plus d'informations sur l'événement (lieu précis, horaire précis, programme précis...)")
   start_time = models.DateTimeField (
       verbose_name="Début",
       help_text="AAAA-MM-JJ HH:MM")
@@ -72,7 +72,7 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       choices=SCOPE,
       verbose_name="portée",
       default ='L',
-      help_text="Indiquez si l'évènement s'adresse à un publique local, national ou international.")
+      help_text="Indiquez si l'événement s'adresse à un publique local, national ou international.")
 
   submission_time = models.DateTimeField (auto_now_add=True);
   updated_time = models.DateTimeField (auto_now=True);
@@ -80,7 +80,7 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
   venue = models.CharField (max_length=200,
       blank=True,
       verbose_name="Nom de l'endroit",
-      help_text="Optionnel. Nom de l'endroit où se déroule l'évènement, example: Pub chez Moe"
+      help_text="Optionnel. Nom de l'endroit où se déroule l'événement, exemple: Pub chez Moe"
       )
   address = models.CharField (max_length=200,
       verbose_name="Adresse",
