@@ -20,6 +20,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from tagging.fields import TagField
 
 class Region (models.Model):
   id = models.PositiveSmallIntegerField(primary_key=True)
@@ -62,6 +63,7 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
   url = models.URLField (
       verbose_name="site web",
       help_text="Lien direct vers une page donnant plus d'informations sur l'événement (lieu précis, horaire précis, programme précis...)")
+  tags = TagField (help_text="Une liste de mots séparés par un espace. Ne pas mettre de lieu dans les tags. <br/>Exemple: python django")
   start_time = models.DateTimeField (
       verbose_name="Début",
       help_text="AAAA-MM-JJ HH:MM")
