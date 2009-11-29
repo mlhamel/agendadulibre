@@ -104,6 +104,10 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
   moderated = models.BooleanField (default=False)
   decision_time = models.DateTimeField (blank=True,null=True);
 
+  submiter_email = models.EmailField (max_length=200,
+      verbose_name="Votre courriel",
+      help_text="Entrez votre courriel, vous serez responsable de cette entrée dans l'Agenda. Ce courriel ne sera pas rendu public. Un modérateur pourrait avoir besoin de vous contacter.")
+
   def __unicode__ (self):
     return self.title
 
