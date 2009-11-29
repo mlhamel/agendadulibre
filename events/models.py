@@ -58,7 +58,7 @@ class Event (models.Model):
   description = models.TextField (
       verbose_name="Description",
       help_text="""Décrivez de la manière la plus complète possible votre événement.
-Les balises HTML autorisées sont &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;br/&gt;, &lt;a&gt;. Utilisez &lt;h3&gt; jusqu'à &lt;h5&gt; pour diviser votre texte au besoin. Merci d'utiliser ces balises pour formater la description de votre événement.
+Les balises HTML autorisées sont &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;br/&gt;, &lt;a&gt;. Utilisez &lt;h3&gt; jusqu'à &lt;h5&gt; pour diviser votre texte au besoin. Merci d'utiliser ces balises pour formater la description de votre événement. <br/>
 Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non la balise &lt;br/&gt;.""")
   url = models.URLField (
       verbose_name="site web",
@@ -66,10 +66,10 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
   tags = TagField (help_text="Une liste de mots séparés par un espace. Ne pas mettre de lieu dans les tags. <br/>Exemple: python django")
   start_time = models.DateTimeField (
       verbose_name="Début",
-      help_text="AAAA-MM-JJ HH:MM")
+      help_text="AAAA-MM-JJ HH:MM (format 24 heures)")
   end_time = models.DateTimeField (
       verbose_name="Fin",
-      help_text="AAAA-MM-JJ HH:MM")
+      help_text="AAAA-MM-JJ HH:MM (format 24 heures)")
   scope = models.CharField(max_length=1,
       choices=SCOPE,
       verbose_name="portée",
@@ -82,7 +82,7 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
   venue = models.CharField (max_length=200,
       blank=True,
       verbose_name="Nom de l'endroit",
-      help_text="Optionnel. Nom de l'endroit où se déroule l'événement, exemple: Pub chez Moe"
+      help_text="Optionnel. Nom de l'endroit où se déroule l'événement. <br/>Exemple: Pub chez Moe"
       )
   address = models.CharField (max_length=200,
       verbose_name="Adresse",
@@ -97,7 +97,7 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       verbose_name="Personne ressource",
       help_text="Entrez le nom d'une personne que les visiteurs peuvent contacter pour plus d'information")
   contact_email = models.EmailField (max_length=200,
-      verbose_name="Courriel",
+      verbose_name="Courriel de cette personne",
       help_text="Entrez le courriel de la personne ressource")
 
   moderator = models.ForeignKey(User, blank=True, null=True, related_name="moderated_events")
@@ -109,7 +109,4 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
 
   def get_absolute_url (self):
     return "/event/%i/" % self.id
-
-
-
 
