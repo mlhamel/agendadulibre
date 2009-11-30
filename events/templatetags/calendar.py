@@ -55,7 +55,7 @@ def month_cal(year, month, region = None):
     event_list = Event.objects.filter (
         start_time__gte=first_day_of_calendar,
         end_time__lte=last_day_of_calendar,
-        moderated=True).filter (q).order_by ('city__region__name')
+        moderated=True).filter (q)
 
     month_cal = []
     week = []
