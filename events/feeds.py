@@ -59,7 +59,7 @@ class ICalendarFeed(object):
                     event.add(vkey).value = value
 
         response = HttpResponse(cal.serialize())
-        response['Content-Type'] = 'text/calendar'
+        response['Content-Type'] = 'text/calendar;charset=UTF-8'
 
         return response
 
