@@ -45,6 +45,9 @@ class ICalendarFeed(object):
     def __call__(self, *args, **kwargs):
 
         cal = vobject.iCalendar()
+        cal.add('X-WR-CALNAME').value = getattr(self, "name")()
+        cal.add('X-WR-CALDESC').value = getattr(self, "description")()
+        cal.add('X-WR-TIMEZONE').value = getattr(self, "timezone")()
 
         for item in self.items():
 
@@ -59,6 +62,15 @@ class ICalendarFeed(object):
         response['Content-Type'] = 'text/calendar'
 
         return response
+
+    def name (self):
+        return ""
+
+    def description (self):
+        return ""
+
+    def timezone (self):
+        return ""
 
     def items(self):
         return []
@@ -89,6 +101,14 @@ class ICalendarFeed(object):
 
 
 class UpcomingEventCalendar(ICalendarFeed):
+    def name(self):
+        return u"L'Agenda du libre du Québec"
+
+    def description(self):
+        return u"Tous les événements du libre du Québec"
+
+    def timezone(self):
+        return u"America/Montreal"
 
     def items(self):
         start = date.today() - timedelta (days=30)
@@ -115,6 +135,15 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
 
     def __init__(self, region):
         self.region = region
+
+    def name(self):
+        return u"L'Agenda du libre du Québec (" + self.region.name + ")"
+
+    def description(self):
+        return u"Tous les événements du libre du Québec pour la région " + self.region.name
+
+    def timezone(self):
+        return u"America/Montreal"
 
     def items(self):
         start = date.today() - timedelta (days=30)
