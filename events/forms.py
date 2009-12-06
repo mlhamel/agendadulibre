@@ -20,10 +20,17 @@
 
 from django import forms
 from events.models import Event, City, Region
+from events.widgets import SplitSelectDateTimeWidget
 from django.forms.util import ErrorList
 from datetime import datetime
 
 class EventForm(forms.ModelForm):
+    start_time = forms.DateTimeField(widget=SplitSelectDateTimeWidget(hour_step=1, \
+        minute_step=15, second_step=30, twelve_hr=False, years=[2009,2010,2011]))
+
+    end_time = forms.DateTimeField(widget=SplitSelectDateTimeWidget(hour_step=1, \
+        minute_step=15, second_step=30, twelve_hr=False, years=[2009,2010,2011]))
+
     city = forms.ModelChoiceField(City.objects.all(), empty_label=None, label="Ville")
 
     class Meta:
