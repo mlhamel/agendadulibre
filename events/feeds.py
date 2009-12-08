@@ -39,6 +39,7 @@ EVENT_ITEMS = (
     ('dtstart', 'start'),
     ('dtend', 'end'),
     ('summary', 'summary'),
+    ('url', 'url'),
     ('description', 'description'),
     ('location', 'location'),
     ('last_modified', 'last_modified'),
@@ -53,6 +54,8 @@ class ICalendarFeed(object):
         cal.add('X-WR-CALNAME').value = getattr(self, "name")()
         cal.add('X-WR-CALDESC').value = getattr(self, "description")()
         cal.add('X-WR-TIMEZONE').value = getattr(self, "timezone")()
+        cal.add('CALSCALE').value = "GREGORIAN";
+        cal.add('METHOD').value = "PUBLISH";
 
         for item in self.items():
 
@@ -104,6 +107,9 @@ class ICalendarFeed(object):
     def item_created(self, item):
         pass
 
+    def item_url(self, item):
+        pass
+
 
 class UpcomingEventCalendar(ICalendarFeed):
     def name(self):
@@ -121,7 +127,7 @@ class UpcomingEventCalendar(ICalendarFeed):
         return Event.objects.filter(moderated=True,start_time__gte=start,start_time__lte=end)
 
     def item_uid(self, item):
-        return str(item.id)
+        return str(item.id) + "@agendadulibre.qc.ca"
 
     def item_start(self, item):
         return item.start_time
@@ -134,6 +140,9 @@ class UpcomingEventCalendar(ICalendarFeed):
 
     def item_description(self, item):
         return remove_html_tags (item.description)
+
+    def item_url(self, item):
+        return item.url
 
 
 class UpcomingEventCalendarByRegion (ICalendarFeed):
@@ -163,7 +172,7 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
         return Event.objects.filter(q).filter(moderated=True,start_time__gte=start,start_time__lte=end)
 
     def item_uid(self, item):
-        return str(item.id)
+        return str(item.id) + "@agendadulibre.qc.ca"
 
     def item_start(self, item):
         return item.start_time
@@ -176,6 +185,10 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
 
     def item_description(self, item):
         return remove_html_tags (item.description)
+
+    def item_url(self, item):
+        return item.url
+
 
 class LatestEntries(Feed):
     title = "Agendadulibre.qc.ca nouveaux évenements"
