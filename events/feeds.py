@@ -18,7 +18,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
 from django.contrib.syndication.feeds import Feed
 from agenda.events.models import Event, Region
 from django.utils.feedgenerator import Rss201rev2Feed
@@ -28,6 +27,12 @@ from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.db.models import Q
+
+import re
+
+def remove_html_tags(data):
+    p = re.compile(r'<.*?>')
+    return p.sub('', data)
 
 EVENT_ITEMS = (
     ('uid', 'uid'),
@@ -128,7 +133,7 @@ class UpcomingEventCalendar(ICalendarFeed):
         return item.address + ", " + item.city.name + u", Québec"
 
     def item_description(self, item):
-        return item.description
+        return remove_html_tags (item.description)
 
 
 class UpcomingEventCalendarByRegion (ICalendarFeed):
@@ -170,7 +175,7 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
         return item.address + ", " + item.city.name + ", " + item.city.region.name
 
     def item_description(self, item):
-        return item.description
+        return remove_html_tags (item.description)
 
 class LatestEntries(Feed):
     title = "Agendadulibre.qc.ca nouveaux évenements"
