@@ -47,6 +47,9 @@ def propose (request):
     'form': form,
     })
 
+def region_cmp (a, b):
+  return a['value'] - b['value']
+
 
 def stats (request):
   total = Event.objects.filter(moderated=True).aggregate(Count('id'))['id__count']
@@ -59,6 +62,7 @@ def stats (request):
        'name': region.name,
        'value': Event.objects.filter(moderated=True,city__region=region).aggregate(Count('id'))['id__count']
        })
+  region_list.sort (region_cmp, reverse=True)
 
   return render_to_response('events/stats.html', {
     'region_list': region_list,
