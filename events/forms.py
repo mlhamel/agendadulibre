@@ -25,11 +25,16 @@ from django.forms.util import ErrorList
 from datetime import datetime
 
 class EventForm(forms.ModelForm):
+    year = datetime.today().year
+    years = [year,
+             year + 1,
+             year + 2]
+
     start_time = forms.DateTimeField(widget=SplitSelectDateTimeWidget(hour_step=1, \
-        minute_step=15, second_step=30, twelve_hr=False, years=[2009,2010,2011]))
+        minute_step=15, second_step=30, twelve_hr=False, years=years))
 
     end_time = forms.DateTimeField(widget=SplitSelectDateTimeWidget(hour_step=1, \
-        minute_step=15, second_step=30, twelve_hr=False, years=[2009,2010,2011]))
+        minute_step=15, second_step=30, twelve_hr=False, years=years))
 
     city = forms.ModelChoiceField(City.objects.all(), empty_label=None, label="Ville")
 
