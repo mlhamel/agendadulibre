@@ -64,12 +64,8 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       verbose_name="site web",
       help_text="Lien direct vers une page donnant plus d'informations sur l'événement (lieu précis, horaire précis, programme précis...)")
   tags = TagField (help_text="Une liste de mots séparés par un espace. Ne pas mettre de lieu dans les tags. <br/>Exemple: python django")
-  start_time = models.DateTimeField (
-      verbose_name="Début",
-      help_text="AAAA-MM-JJ HH:MM (format 24 heures)")
-  end_time = models.DateTimeField (
-      verbose_name="Fin",
-      help_text="AAAA-MM-JJ HH:MM (format 24 heures)")
+  start_time = models.DateTimeField ()
+  end_time = models.DateTimeField ()
   scope = models.CharField(max_length=1,
       choices=SCOPE,
       verbose_name="portée",

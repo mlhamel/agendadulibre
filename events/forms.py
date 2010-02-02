@@ -30,10 +30,12 @@ class EventForm(forms.ModelForm):
              year + 1,
              year + 2]
 
-    start_time = forms.DateTimeField(widget=SplitSelectDateTimeWidget(hour_step=1, \
+    start_time = forms.DateTimeField(label="Débute le", \
+        widget=SplitSelectDateTimeWidget(hour_step=1, \
         minute_step=15, second_step=30, twelve_hr=False, years=years))
 
-    end_time = forms.DateTimeField(widget=SplitSelectDateTimeWidget(hour_step=1, \
+    end_time = forms.DateTimeField(label="Se termine le", \
+        widget=SplitSelectDateTimeWidget(hour_step=1, \
         minute_step=15, second_step=30, twelve_hr=False, years=years))
 
     city = forms.ModelChoiceField(City.objects.all(), empty_label=None, label="Ville")
