@@ -80,13 +80,13 @@ class SelectTimeWidget(Widget):
             self.meridiem_val = 'a.m.' # Default to Morning (A.M.)
 
         if hour_step and twelve_hr:
-            self.hours = range(1,13,hour_step) 
+            self.hours = range(1,13,hour_step)
         elif hour_step: # 24hr, with stepping.
             self.hours = range(0,24,hour_step)
         elif twelve_hr: # 12hr, no stepping
             self.hours = range(1,13)
         else: # 24hr, no stepping
-            self.hours = range(0,24) 
+            self.hours = range(0,24)
 
         if minute_step:
             self.minutes = range(0,60,minute_step)
@@ -162,23 +162,6 @@ class SelectTimeWidget(Widget):
         local_attrs['id'] = self.minute_field % id_
         select_html = Select(choices=minute_choices).render(self.minute_field % name, minute_val, local_attrs)
         output.append(select_html)
-        output.append(":")
-
-        second_choices = [("%.2d"%i, "%.2d"%i) for i in self.seconds]
-        local_attrs['id'] = self.second_field % id_
-        select_html = Select(choices=second_choices).render(self.second_field % name, second_val, local_attrs)
-        output.append(select_html)
-
-        if self.twelve_hr:
-            #  If we were given an initial value, make sure the correct meridiem get's selected.
-            if self.meridiem_val is not None and  self.meridiem_val.startswith('p'):
-                    meridiem_choices = [('p.m.','p.m.'), ('a.m.','a.m.')]
-            else:
-                meridiem_choices = [('a.m.','a.m.'), ('p.m.','p.m.')]
-
-            local_attrs['id'] = local_attrs['id'] = self.meridiem_field % id_
-            select_html = Select(choices=meridiem_choices).render(self.meridiem_field % name, self.meridiem_val, local_attrs)
-            output.append(select_html)
 
         return mark_safe(u'\n'.join(output))
 
@@ -189,7 +172,7 @@ class SelectTimeWidget(Widget):
     def value_from_datadict(self, data, files, name):
         # if there's not h:m:s data, assume zero:
         h = data.get(self.hour_field % name, 0) # hour
-        m = data.get(self.minute_field % name, 0) # minute 
+        m = data.get(self.minute_field % name, 0) # minute
         s = data.get(self.second_field % name, 0) # second
 
         meridiem = data.get(self.meridiem_field % name, None)
@@ -197,7 +180,7 @@ class SelectTimeWidget(Widget):
         #NOTE: if meridiem IS None, assume 24-hr
         if meridiem is not None:
             if meridiem.lower().startswith('p') and int(h) != 12:
-                h = (int(h)+12)%24 
+                h = (int(h)+12)%24
             elif meridiem.lower().startswith('a') and int(h) == 12:
                 h = 0
 
