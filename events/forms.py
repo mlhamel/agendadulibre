@@ -48,6 +48,9 @@ class EventForm(forms.ModelForm):
       start_time = cleaned_data.get("start_time")
       end_time = cleaned_data.get("end_time")
 
+      if not (start_time and end_time):
+        return cleaned_data
+
       if start_time >= end_time:
         msg = u"L'évènement ne peut se terminer avant son début"
         self._errors["start_time"] = ErrorList([msg])
