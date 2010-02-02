@@ -1,3 +1,12 @@
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Montréal", 6, 45.545447, -73.639076);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Québec", 3, 46.812754, -71.215223);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Sherbrooke", 5, 45.398599, -71.918771);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Laval", 13, 45.570347, -73.692032);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Longueuil", 16, 45.531273, -73.518087);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Gatineau", 7, 45.476592, -75.701268);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Saguenay", 2, 48.630543, -71.691867);
+INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Trois-Rivières", 4, 46.350883, -72.54806);
+
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Abercorn", 16, 45.032999, -72.663057);
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Acton Vale", 16, 45.651469, -72.562224);
 INSERT INTO events_city (name, region_id, latitude, longitude) VALUES ("Adstock", 12, 46.024672, -71.19447);
