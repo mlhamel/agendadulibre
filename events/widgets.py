@@ -1,7 +1,7 @@
 # -*- encoding:utf-8 -*-
 import re
 from django.forms.widgets import Widget, Select, MultiWidget
-from django.forms.extras.widgets import SelectDateWidget
+from django_widgets import SelectDateWidget
 from django.utils.safestring import mark_safe
 
 class SplitSelectDateTimeWidget(MultiWidget):
@@ -25,6 +25,7 @@ class SplitSelectDateTimeWidget(MultiWidget):
 
     def decompress(self, value):
         if value:
+            print value
             return [value.date(), value.time().replace(microsecond=0)]
         return [None, None]
 
@@ -173,7 +174,6 @@ class SelectTimeWidget(Widget):
         # if there's not h:m:s data, assume zero:
         h = data.get(self.hour_field % name, 0) # hour
         m = data.get(self.minute_field % name, 0) # minute
-        s = data.get(self.second_field % name, 0) # second
 
         meridiem = data.get(self.meridiem_field % name, None)
 
@@ -184,8 +184,8 @@ class SelectTimeWidget(Widget):
             elif meridiem.lower().startswith('a') and int(h) == 12:
                 h = 0
 
-        if (int(h) == 0 or h) and m and s:
-            return '%s:%s:%s' % (h, m, s)
+        if (int(h) == 0 or h) and m:
+            return '%s:%s' % (h, m)
 
         return data.get(name, None)
 
