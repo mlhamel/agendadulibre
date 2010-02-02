@@ -67,7 +67,7 @@ class ICalendarFeed(object):
                     event.add(vkey).value = value
 
         response = HttpResponse(cal.serialize())
-        response['Content-Type'] = 'text/calendar;charset=UTF-8'
+        response['Content-Type'] = 'application/octet-stream; charset=utf-8'
 
         return response
 
@@ -267,4 +267,4 @@ class UpcomingEntriesByRegion(UpcomingEntries):
         else:
           q = Q()
 
-        return Event.objects.filter(q).filter(moderated=True).order_by('start_time')[:10]
+        return Event.objects.filter(q).filter(moderated=True).order_by('-start_time')[:10]
