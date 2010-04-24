@@ -30,8 +30,8 @@ def event_time(start, end):
     result = ""
 
     # Hack! get the correct user local from the request
-    loc = locale.getlocale()
-    locale.setlocale(locale.LC_ALL, 'fr_CA.UTF8')
+    #loc = locale.getlocale()
+    #locale.setlocale(locale.LC_ALL, 'fr_CA.UTF8')
 
     if start == today:
         result += "Aujourd'hui "
@@ -45,6 +45,6 @@ def event_time(start, end):
         result += "à %s" % start.strftime ("%H:%M")
         result += "jusqu'au %s" % end.strftime ("%A %d %B %Y à %H:%M")
 
-    locale.setlocale(locale.LC_ALL, loc)
+    #locale.setlocale(locale.LC_ALL, loc)
     return result
 

@@ -4,7 +4,7 @@ Tagging components for Django's form library.
 from django import forms
 from django.utils.translation import ugettext as _
 
-from agenda import settings
+from django.conf import settings
 from agenda.tagging.models import Tag
 from agenda.tagging.utils import parse_tag_input
 

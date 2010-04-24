@@ -1,3 +1,21 @@
+# buildout things
+bin
+eggs
+parts
+downloads
+develop-eggs
+.installed.cfg
+
+# eggs files
+agenda.egg-info/
+
+# temp files
 *.sw*
 *.pyc
+*~
+
+# configuration files
+agendadulibre
 settings.py
+production.py
+development.py
