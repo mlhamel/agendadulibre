@@ -21,7 +21,12 @@ from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
 from django.conf import settings
 from django.contrib import admin
+
+import os
+
 admin.autodiscover()
+
+admin_media_path = os.path.join(os.path.dirname(admin.__file__), 'media')
 
 #    (r'^$', 'agenda.views.construction'),                       
 urlpatterns = patterns('',
@@ -30,6 +35,9 @@ urlpatterns = patterns('',
     (r'^about/$', direct_to_template, {'template': 'about.html'}),
 
     (r'^admin/', include(admin.site.urls)),
+
+    (r'^admin_media/(.*)', 'django.views.static.serve', 
+         {'document_root' : admin_media_path, 'show_indexes' : True}),    
 
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', 
          {'document_root': settings.MEDIA_ROOT}),
