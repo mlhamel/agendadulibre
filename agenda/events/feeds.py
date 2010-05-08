@@ -18,17 +18,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.contrib.syndication.feeds import Feed
-from agenda.events.models import Event, Region
+from django.contrib.syndication.feeds import Feed, FeedDoesNotExist
 from django.utils.feedgenerator import Rss201rev2Feed
-from datetime import date, timedelta
-import vobject
-from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.db.models import Q
+from django.utils.encoding import smart_unicode, force_unicode, smart_str
 
+from agenda.events.models import Event, Region
+
+from datetime import date, timedelta
+
+import vobject
 import re
+import locale
 
 def remove_html_tags(data):
     p = re.compile(r'<.*?>')
@@ -49,6 +52,7 @@ EVENT_ITEMS = (
 class ICalendarFeed(object):
 
     def __call__(self, *args, **kwargs):
+        response = HttpResponse()
 
         cal = vobject.iCalendar()
         cal.add('X-WR-CALNAME').value = getattr(self, "name")()
@@ -63,12 +67,14 @@ class ICalendarFeed(object):
 
             for vkey, key in EVENT_ITEMS:
                 value = getattr(self, 'item_' + key)(item)
+                if isinstance(value, str):
+                    value = smart_unicode(value)
                 if value:
                     event.add(vkey).value = value
 
+        locale.setlocale(locale.LC_ALL, 'fr_CA.UTF8')
         response = HttpResponse(cal.serialize())
         response['Content-Type'] = 'application/octet-stream; charset=utf-8'
-
         return response
 
     def name (self):

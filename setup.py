@@ -23,6 +23,15 @@ setup(name='agenda',
       include_package_data=True,
       zip_safe=False,
       install_requires=['vobject',
+                        'werkzeug',
+                        'djangorecipe',
                         'django'],
-      entry_points={'django.apps': 'agenda = agenda'},
+      entry_points={
+        'django.apps': [
+            'agenda = agenda'
+            ],
+        'console_scripts':[
+            'debug = agenda.command:debug'
+            ],
+        },
 )
