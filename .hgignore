@@ -1,0 +1,9 @@
+~
+.pyc
+.installed.cfg
+agenda.egg-info/
+downloads/
+bin/
+eggs/
+develop-eggs/
+parts/

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Liste des évènements</h2>
+    <ul>
+        {% for event in event_list %}
+        <li><a href="{{ event.id }}">{{ event.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    Pages
+    <ul>
+        {% for page in page_range %}
+        <li><a href="?page={{ page }}">{{ page }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

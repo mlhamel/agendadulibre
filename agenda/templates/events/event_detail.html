@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load humantime %}
+
+{% block content %}
+<h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
+<b class="date">{{ event.start_time|event_time:event.end_time }}</b><br/>
+<br/>
+{% if event.venue %}
+<b>{{ event.venue}}</b><br/>
+{% endif %}
+{{ event.address}} <br/>
+{{ event.city }}, Québec<br/>
+<span class="not-important">
+Voir sur <a href="http://maps.google.ca/maps?q={{ event.address }},{{event.city}},Quebec&oe=utf-8&hl=fr">Google Maps</a> ou
+<a href="http://cf.maps.yahoo.com/?q1={{ event.address }},{{event.city}},Quebec,Canada">Yahoo Maps</a></span>
+
+<h3>Description</h3>
+{% autoescape off %}
+{{ event.description }}
+{% endautoescape %}
+<br/>
+<h3>Informations</h3>
+Personne ressource : <a href="mailto:{{ event.contact_email }}">{{ event.contact }}</a><br/>
+Tags: {{ event.tags }}
+<p class="not-important">
+Porté: {{ event.get_scope_display }}<br/>
+Ajouté le {{ event.submission_time }}<br/>
+Dernière mise-à-jour le {{ event.updated_time }}<br/>
+</p>
+{% endblock %}

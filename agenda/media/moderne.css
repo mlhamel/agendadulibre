@@ -1,0 +1,339 @@
+/* Copyright 2006
+ * - Erwan Leherisse  <air1ontheweb CHEZ free POINT fr>
+ * - Mélanie Bats  <melanie POINT bats CHEZ utbm POINT fr>
+ * - Thomas Petazzoni  <thomas POINT petazzoni CHEZ enix POINT org>
+ * - Jean-Marie Favreau  <jeanmarie POINT favreau CHEZ free POINT fr>
+ * - Pierre-Luc Beaudoin  <pierre-luc POINT beaudoin CHEZ novopia POINT com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
+ */
+
+body {
+  background-color: #c7e0ed;
+  color: black;
+  font-size: 11pt;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+div.header {
+  padding: 10px;
+  background: url('/media/img/bg.png') repeat-x white;
+  height: 75px;
+  -moz-border-radius: 20px 20px 0 0;
+  -webkit-border-top-left-radius: 20px;
+  -webkit-border-top-right-radius: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+div.main {
+  padding: 10px;
+  background: white;
+  max-width: 1200px;
+  margin: auto;
+}
+
+div.footer {
+  background: url('/media/img/bg.png') repeat-x white;
+  padding: 10px;
+  color: black;
+  text-align: center;
+  -moz-border-radius: 0 0 20px 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+div.header img.logo {
+  float: left;
+  padding: 5px 10px 5px 5px;
+  border: 0px;
+}
+
+div.header div.actions {
+  float: right;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+div.header div.actions div.action img {
+  border: 0px;
+  padding: 2px 5px 2px 2px;
+  vertical-align: middle;
+}
+
+#important
+{
+  position: absolute;
+  border: 1px dashed black;
+  float: right;
+  top: 1.5em;
+  right: 1.5em;
+  width: 20.5em;
+}
+
+#important p
+{
+  margin: 0;
+  padding: 2px;
+  font-size: 12pt;
+}
+
+h1 {
+  font-family : Georgia, serif;
+  margin-bottom: 5px;
+}
+
+h2 {
+  color : #5d6064;
+  margin-top: 0;
+}
+
+h2.calendar {
+  text-align: center;
+}
+
+a {
+  color: #336699;
+}
+
+a:visited {
+  color: #336699;
+}
+
+a:hover, a:active {
+  color: #5b8ec2;
+}
+
+table.form {
+  border-collapse: collapse;
+}
+
+table.form th {
+  text-align: right;
+  vertical-align: top;
+  white-space: nowrap;
+  padding: 2px;
+  border-bottom: 1px #eee solid;
+}
+
+table.form td.help {
+  font-size: 10pt;
+  width: 40%;
+  padding-left: 10px;
+}
+
+table.form td {
+  vertical-align: top;
+  border-bottom: 1px #eee solid;
+}
+
+table.calendar {
+  width: 90%;
+  margin: 0 auto;
+}
+
+table.calendar td {
+  height: 6em;
+  vertical-align: top;
+  width: 14%;
+  text-align: left;
+  color: #444444;
+  padding: 2px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #fff;
+}
+
+table.calendar ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+table.calendar li.region {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+table.calendar td:hover {
+  border: 1px solid #8bbfda;
+}
+
+table.calendar td ul {
+  font-size: 10pt;
+  padding-left: 5px;
+  margin: 0;
+}
+
+table.calendar .region {
+  color: #aaa;
+  font-size: 8pt;
+  line-height: 8pt;
+}
+
+table.calendar td ul li {
+  margin: 0px 0px 5px 0px;
+  padding: 0px 0px 0px 0px;
+  line-height: 1.1em;
+  margin-left: 15px;
+}
+
+/*
+ * These attributes apply to the cells that correspond to the days
+ * already past in the current month.
+ */
+td.past_month {
+  background: #c7e0ed;
+}
+
+
+/*
+ * These attributes apply to the cells that correspond to the future
+ * days in the current month.
+ */
+td.current_month {
+  background: #e5f6ff;/*e0faff--e6fbff--e5f6ff*/
+}
+
+/*
+ * These attributes apply to the cell corresponding to the current day
+ */
+td.today {
+  background: #ffffdf;
+}
+
+/*
+ * These attributes apply to the cells that correspond to days in the
+ * previous or next month of the current month
+ */
+td.other_month {
+  background: #eeeeee;
+}
+
+td.label {
+  vertical-align: top;
+}
+
+.errorlist {
+  color: red;
+  font-weight: bold;
+}
+
+p.error {
+  color: red;
+  font-weight: bold;
+}
+
+
+/*
+ * Advises for event submission. (used only in submit.php)
+ */
+#advises
+{
+  background-color: #e5f6ff;
+  margin: 0px 100px 20px 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border: 1px solid #b3e5ff;
+}
+
+#advises h1
+{
+  font-family: Arial,Helvetica,sans-serif;
+  color : #5d6064;
+}
+
+/*
+ * Statistics (used only by list.php)
+ */
+
+table.list {
+  width: 60%;
+}
+
+table.list tr.odd td {
+  background-color: #cae9ff;
+}
+
+table.list tr.even td {
+  background-color: #b9d8ff;
+}
+
+table.list td.item {
+  width: 60%;
+  text-align: left;
+}
+
+table.list td,th {
+  padding: 5px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  text-align: center;
+}
+
+table.list td.value {
+  text-align: right;
+}
+
+b.date {
+  font-size: 12pt;
+}
+
+.not-important {
+  font-size: 10pt;
+}
+
+#subtitle
+{
+  margin-top: 0;
+}
+
+form#filter {
+  text-align: center;
+}
+
+img#arrow {
+  border: 0px;
+  vertical-align: middle;
+}
+
+img#arrow a,img#arrow a:visited {
+  border: 0px;
+}
+
+input#id_url,
+input#id_tags,
+textarea#id_description,
+input#id_title {
+  width: 100%;
+}
+
+input#id_venue,
+input#id_contact,
+input#id_contact_email,
+input#id_address,
+input#id_submiter_email {
+  width: 75%;
+}
+
+h1 a {
+  text-decoration: none;
+}
+

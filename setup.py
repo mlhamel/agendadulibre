@@ -22,10 +22,11 @@ setup(name='agenda',
       namespace_packages=['agenda',],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['vobject',
-                        'werkzeug',
-                        'djangorecipe',
-                        'django'],
+      install_requires=[
+        'vobject',
+        'werkzeug',
+        'djangorecipe',
+        'django'],
       entry_points={
         'django.apps': [
             'agenda = agenda'

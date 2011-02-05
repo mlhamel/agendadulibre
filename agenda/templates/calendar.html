@@ -1,0 +1,31 @@
+<table class="calendar">
+  <tr>
+  {% for day in headers %}
+    <th>{{ day|date:"l" }}</th>
+  {% endfor %}
+  </tr>
+  {% for week in calendar %}
+  <tr>
+    {% for day in week %}
+    <td class="{% if day.in_month %}{% if day.is_past %}past_month{% else %}current_month{% endif %}{% else %}other_month{% endif %} {% if day.is_today %}today{% endif %}">
+        <div id="day">{{ day.day|date:"j" }}</div>
+        {% if day.events %}
+          <ul>
+          {% for event in day.events %}
+            <li><a href="/event/{{ event.id }}/">{{ event.title }}</a>
+            {% if not region %}
+            <br/><span class="region">{{ event.city }}</span>
+            {% else %}
+                {% ifnotequal region.name event.city.region.name %}
+                <br/><span class="region">{{ event.city }}</span>
+                {% endifnotequal %}
+            {% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      </td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Exportation des données</h2>
+<p>Il y a plusieurs manières d'accéder à l'information de l'Agenda du libre du Québec.  L'une d'elle est la page Web,
+les autres sont les fils RSS et les calendriers iCal.  Les fils RSS sont utilisables dans un navigateur Web ou une application de lecture de nouvelles.  Les calendriers iCal sont utiles dans une application de calendrier: les événements s'y ajouteront automatiquement à partir du site Web.
+<h3>Fils RSS</h3>
+Chaque fils RSS liste les 10 événements pour les prochains jours ou les 10 plus récents événements ajoutés, pour tous le Québec ou pour une région donnée. En vous abonnant à un fils régional, vous recevrez des informations sur les événements de votre région à portée locale, mais également les événements à portée nationale.
+
+<table class="list">
+<tr>
+  <th>Région</th>
+  <th>Nouveaux<br/>événements</th>
+  <th>Événements<br/>à venir</th>
+</tr>
+<tr class="odd">
+  <td class="item">Toutes les régions</td>
+  <td><a href="/event/feeds/latest/">RSS</a></td>
+  <td><a href="/event/feeds/upcoming/">RSS</a></td>
+</tr>
+{% for region in region_list %}
+<tr class="{% cycle "even" "odd" %}">
+  <td class="item">{{ region.name }}</td>
+  <td><a href="/event/feeds/latest_region/{{ region.id }}/">RSS</a></td>
+  <td><a href="/event/feeds/upcoming_region/{{ region.id }}/">RSS</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Calendrier iCal</h3>
+<p>Chaque calendrier iCal liste les événements des 30 derniers jours et des 60 jours à venir dans une région donnée. En vous inscrivant au calendrier de votre région, vous verrez apparaître les événements de votre région à portée locale, ainsi que tous les événements à portée nationale. Le lien webcal permet d'ajouter un calendrier dans votre logiciel favori, tandis que le lien Google permet d'ajouter un calendrier à votre agenda Google.</p>
+
+<table class="list">
+<tr>
+  <th>Région</th>
+  <th colspan="2">Événements à venir</th>
+</tr>
+<tr class="odd">
+  <td class="item">Toutes les régions</td>
+  <td><a href="webcal://www.agendadulibre.qc.ca/event/calendar/">Webcal</a></td>
+  <td><a href="http://www.google.com/calendar/render?cid=http://www.agendadulibre.qc.ca/event/calendar/">Google Calendar</a></td>
+</tr>
+{% for region in region_list %}
+<tr class="{% cycle "even" "odd" %}">
+  <td class="item">{{ region.name }}</td>
+  <td><a href="webcal://www.agendadulibre.qc.ca/event/calendar_region/{{ region.id }}/">Webcal</a></td>
+  <td>  <a href="http://www.google.com/calendar/render?cid=http://www.agendadulibre.qc.ca/event/calendar_region/{{ region.id }}/">Google Calendar</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
+

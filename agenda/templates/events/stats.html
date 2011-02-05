@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Statistiques</h2>
+<h3>Statistiques générales</h3>
+<table class="list">
+<tr>
+  <th></th>
+  <th colspan="2">Événements</th>
+</tr>
+<tr class="odd">
+  <td class="item">Nombre d'événements validés depuis la création de l'agenda</td>
+  <td>{{ total }}</td>
+</tr>
+<tr class="even">
+  <td class="item">Nombre d'événements en attente de modération</td>
+  <td>{{ total_to_moderate }}</td>
+</tr>
+</table>
+
+<h3>Statistiques par région</h3>
+<table class="list">
+{% for region in region_list %}
+<tr class="{% cycle "odd" "even" %}">
+  <td class="item">{{ region.name }}</td>
+  <td>{{ region.value }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+
