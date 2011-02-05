@@ -5,14 +5,14 @@
 		Consult the Wiki for more details: http://wiki.moxiecode.com/index.php/TinyMCE:Creating_Language
 	-->
   <header>
-    <author>marj - révisé par jojaba</author>
-    <version major="32" minor="6" releasedate="2009-11-27" />
+    <author>marj - révisé par jojaba, puis vincentfretin</author>
+    <version major="41" minor="5" releasedate="2010-04-28" />
     <description>Ceci est le paquetage français pour TinyMCE.</description>
   </header>
   <language code="fr" title="Français" dir="ltr">
     <!-- Common items, these are shared between themes and plugins -->
     <group target="common">
-      <item name="edit_confirm">souhaitez-vous utiliser le mode WYSIWYG pour cette zone  de texte ?</item>
+      <item name="edit_confirm">Souhaitez-vous utiliser le mode WYSIWYG pour cette zone de texte ?</item>
       <item name="apply">Appliquer</item>
       <item name="insert">Insérer</item>
       <item name="update">Mettre à jour</item>
@@ -22,7 +22,7 @@
       <item name="class_name">Class</item>
       <item name="not_set">-- non défini --</item>
       <item name="clipboard_msg">Les fonctions Copier/Couper/Coller ne sont pas valables sur Mozilla et Firefox.\nSouhaitez-vous avoir plus d'informations sur ce sujet ?</item>
-      <item name="clipboard_no_support">Actuellement pas pris en charge par votre navigateur. Veuillez tiliser les raccourcis clavier à la place.</item>
+      <item name="clipboard_no_support">Actuellement non supporté par votre navigateur.\n Veuillez utiliser les raccourcis clavier à la place.</item>
       <item name="popup_blocked">Désolé, nous avons détecté que votre bloqueur de popup a bloqué une fenêtre dont l'application a besoin. Vous devez désactiver votre bloqueur de popup pour pouvoir utiliser cet outil.</item>
       <item name="invalid_data">Erreur : saisie de valeurs incorrectes. Elles sont mises en évidence en rouge.</item>
       <item name="more_colors">Plus de couleurs</item>
@@ -99,9 +99,9 @@
       <item name="help_desc">Aide</item>
       <item name="blockquote_desc">Citation</item>
       <!-- Misc -->
-      <item name="clipboard_msg">Vous ne pouvez pas copier/couper/coller sous Mozilla et sous Firefox.\nSouhaitez-vous en apprendre davantage sur ce problème ?</item>
+      <item name="clipboard_msg">Les fonctions Copier/Couper/Coller ne sont pas valables sur Mozilla et Firefox.\nSouhaitez-vous avoir plus d'informations sur ce sujet ?</item>
       <item name="path">Chemin</item>
-      <item name="newdocument">Souhaitez-vous vraiment effacer tout le contenu du document ?</item>
+      <item name="newdocument">Êtes-vous sûr de vouloir effacer l'intégralité du document ?</item>
       <item name="toolbar_focus">Atteindre les boutons de l'éditeur - Alt+Q, Aller à l'éditeur - Alt-Z, Aller au chemin de l'élément - Alt-X</item>
       <item name="more_colors">Plus de couleurs</item>
       <!-- Relative dialog sizes, example: 10 or -10 -->
@@ -326,7 +326,7 @@
       <item name="mouseout">à la sortie de la souris</item>
       <item name="misc">Divers</item>
       <item name="example_img">Apparence de l'image</item>
-      <item name="missing_alt">Souhaitez-vous vraiment continuer sans définir de description pour l'image ? Sans elle, l'image peut ne pas être accessible à certains utilisateurs handicapés, ceux utilisant un navigateur texte ou ceux qui naviguent sans affichage des images.</item>
+      <item name="missing_alt">Êtes-vous sûr de vouloir continuer sans définir de description pour l'image ? Sans elle, l'image peut ne pas être accessible à certains utilisateurs handicapés, ceux utilisant un navigateur texte ou ceux qui naviguent sans affichage des images.</item>
       <item name="dialog_title">Insérer / éditer une image</item>
       <item name="src">URL de l'image</item>
       <item name="alt">Description de l'image</item>
@@ -537,6 +537,8 @@
       <item name="paste_text_desc">Coller comme texte brut</item>
       <item name="paste_word_desc">Coller un texte créé sous Word</item>
       <item name="selectall_desc">Tout sélectionner</item>
+      <item name="plaintext_mode_sticky">Le collage est actuellement en mode texte non formaté. Cliquez à nouveau pour revenir en mode de collage ordinaire. Après avoir collé quelque chose, vous retournerez en mode de collage ordinaire.</item>
+      <item name="plaintext_mode">Le collage est actuellement en mode texte non formaté. Cliquez à nouveau pour revenir en mode de collage ordinaire.</item>
     </group>
     <!-- Paste plugin dialog -->
     <group target="paste_dlg">
@@ -632,7 +634,7 @@
       <item name="col_limit">Vous avez dépassé le nombre maximum de colonnes ({$cols}).</item>
       <item name="row_limit">Vous avez dépassé le nombre maximum de lignes ({$rows}).</item>
       <item name="cell_limit">Vous avez dépassé le nombre maximum de cellules ({$cells}).</item>
-      <item name="missing_scope">Souhaitez-vous vraiment continuer sans spécifier de portée pour cette cellule de titre ? Sans portée, cela peut être difficile pour certains usagers à problèmes de comprendre le contenu ou les données affichées dans le tableau.</item>
+      <item name="missing_scope">Êtes-vous sûr de vouloir continuer sans spécifier de portée pour cette cellule de titre ? Sans portée, cela peut être difficile pour certains utilisateurs de comprendre le contenu ou les données affichées dans le tableau.</item>
       <item name="caption">Afficher la légende du tableau</item>
       <item name="frame">Cadre</item>
       <item name="frame_none">aucun</item>
@@ -654,6 +656,8 @@
     <!-- Autosave plugin -->
     <group target="autosave">
       <item name="unload_msg">Les modifications apportées seront perdus si vous quittez cette page.</item>
+      <item name="restore_content">Restaurer le contenu auto-sauvegardé.</item>
+      <item name="warning_message">Si vous restaurez le contenu sauvé, vous perdrez le contenu qui est actuellement dans l'éditeur.\n\nÊtes-vous sûr de vouloir restaurer le contenu sauvé ?</item>
     </group>
     <!-- Fullscreen plugin -->
     <group target="fullscreen">
@@ -707,7 +711,7 @@
       <item name="starttime">Début</item>
       <item name="endtime">Fin</item>
       <item name="href">Href</item>
-      <item name="qtsrcchokespeed">Choke speed</item>
+      <item name="qtsrcchokespeed">Débit maximum</item>
       <item name="target">Cible</item>
       <item name="volume">Volume</item>
       <item name="autostart">Lire automatiquement</item>
@@ -736,7 +740,7 @@
       <item name="imagestatus">Statut de l'image</item>
       <item name="maintainaspect">Maintenir l'aspect</item>
       <item name="nojava">Pas java</item>
-      <item name="prefetch">Prefetch</item>
+      <item name="prefetch">Préchargement</item>
       <item name="shuffle">Aléatoire</item>
       <item name="console">Console</item>
       <item name="numloop">Nombre de tours</item>
@@ -784,7 +788,7 @@
       <item name="meta_tab">Général</item>
       <item name="appearance_tab">Apparence</item>
       <item name="advanced_tab">Avancé</item>
-      <item name="meta_props">Informations Meta</item>
+      <item name="meta_props">Metadonnées</item>
       <item name="langprops">Langue et encodage</item>
       <item name="meta_title">Titre</item>
       <item name="meta_keywords">Mots-clés</item>
@@ -877,8 +881,8 @@
       <item name="select">Choisir un modèle</item>
       <item name="preview">Prévisualisation</item>
       <item name="warning">Attention : Mettre à jour un modèle pour un autre peut entraîner une perte de données !</item>
-      <item name="mdate_format">%d-%m-%Y %H:%M:%S</item>
-      <item name="cdate_format">%d-%m-%Y %H:%M:%S</item>
+      <item name="mdate_format">%d/%m/%Y %H:%M:%S</item>
+      <item name="cdate_format">%d/%m/%Y %H:%M:%S</item>
       <item name="months_long">Janvier,Février,Mars,Avril,Mai,Juin,Juillet,Août,Septembre,Octobre,Novembre,Décembre</item>
       <item name="months_short">Jan,Fév,Mar,Avr,Mai,Juin,Juil,Août,Sep,Oct,Nov,Déc</item>
       <item name="day_long">Dimanche,Lundi,Mardi,Mercredi,Jeudi,Vendredi,Samedi,Dimanche</item>
@@ -903,6 +907,18 @@
     <!-- Pagebreak plugin -->
     <group target="pagebreak">
       <item name="desc">Insérer un saut de page.</item>
+    </group>
+    <group target="advlist">
+      <item name="types">Types</item>
+      <item name="def">Defaut</item>
+      <item name="lower_alpha">Alpha minuscule</item>
+      <item name="lower_greek">Grec minuscule</item>
+      <item name="lower_roman">Romain minuscule</item>
+      <item name="upper_alpha">Alpha majuscule</item>
+      <item name="upper_roman">Romain majuscule</item>
+      <item name="circle">Cercle</item>
+      <item name="disc">Disque</item>
+      <item name="square">Carré</item>
     </group>
   </language>
 </language-pack>

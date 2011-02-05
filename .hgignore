@@ -7,3 +7,5 @@ bin/
 eggs/
 develop-eggs/
 parts/
+etc/
+var/
