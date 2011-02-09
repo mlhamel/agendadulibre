@@ -89,3 +89,7 @@ INSTALLED_APPS = (
 FORCE_LOWERCASE_TAGS = True
 
 FORCE_SCRIPT_NAME = ''
+
+MAX_TAG_LENGTH = 255
+
+FROM_EMAIL = "info@agendadulibre.qc.ca"
