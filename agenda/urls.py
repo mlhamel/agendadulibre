@@ -28,20 +28,17 @@ admin.autodiscover()
 
 admin_media_path = os.path.join(os.path.dirname(admin.__file__), 'media')
 
-#    (r'^$', 'agenda.views.construction'),                       
 urlpatterns = patterns('',
     (r'^event/', include('agenda.events.urls')),
     (r'^$', 'agenda.views.index'),
-    (r'^about/$', direct_to_template, {'template': 'about.html'}),
+    (r'^about/$', 'agenda.views.about'),
+    (r'^settings/$', 'agenda.views.settings'),
 
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^admin_media/(.*)', 'django.views.static.serve', 
-         {'document_root' : admin_media_path, 'show_indexes' : True}),    
+    (r'^admin_media/(.*)', 'django.views.static.serve',
+         {'document_root' : admin_media_path, 'show_indexes' : True}),
 
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve', 
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve',
          {'document_root': settings.MEDIA_ROOT}),
-
-#    (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-#        {'document_root': 'PATH.../templates/media'}),
 )
