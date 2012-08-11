@@ -21,7 +21,12 @@ from django.conf.urls.defaults import *
 from django.views.generic import list_detail
 from django.views.generic.simple import direct_to_template
 from agenda.events.models import Event
-from agenda.events.feeds import LatestEntries, UpcomingEntries, UpcomingEventCalendar, LatestEntriesByRegion, UpcomingEntriesByRegion, UpcomingEventCalendarByRegion
+from agenda.events.feeds import (LatestEntries,
+                                 UpcomingEntries,
+                                 UpcomingEventCalendar,
+                                 LatestEntriesByRegion,
+                                 UpcomingEntriesByRegion,
+                                 UpcomingEventCalendarByRegion)
 
 
 general_info = {
@@ -37,10 +42,10 @@ event_info = general_info
 event_list_info = dict(general_info, **list_info)
 
 feeds = {
-    'latest': LatestEntries,
-    'latest_region': LatestEntriesByRegion,
-    'upcoming': UpcomingEntries,
-    'upcoming_region': UpcomingEntriesByRegion,
+    'latest': LatestEntries(),
+    'upcoming': UpcomingEntries(),
+    'latest_region': LatestEntriesByRegion(),
+    'upcoming_region': UpcomingEntriesByRegion(),
 }
 
 
@@ -55,8 +60,13 @@ urlpatterns = patterns('',
     (r'^stats/$', 'agenda.events.views.stats'),
 
     (r'^feeds/$', 'agenda.events.views.feed_list'),
+    (r'^feeds/latest/$', LatestEntries()),
+    (r'^feeds/upcoming/$', UpcomingEntries()),
+    (r'^feeds/latest_region/(?P<region_id>\d+)/$', LatestEntriesByRegion()),
+    (r'^feeds/upcoming_region/(?P<region_id>\d+)/$', UpcomingEntriesByRegion()),
+
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.Feed',
-        {'feed_dict': feeds}),
+       {'feed_dict': feeds}),
 
     (r'^calendar/$', UpcomingEventCalendar()),
     (r'^calendar_region/(?P<region_id>\d+)/$', 'agenda.events.views.calendar_region'),

@@ -21,6 +21,7 @@
 from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.utils.feedgenerator import Rss201rev2Feed
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
 from django.utils.encoding import smart_unicode, force_unicode, smart_str
@@ -170,7 +171,6 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
         end = date.today() + timedelta (days=60)
 
         if self.region != None:
-          print self.region
           q = Q(city__region=self.region,scope="L") | Q(scope="I") | Q(scope="N")
         else:
           q = Q()
@@ -211,25 +211,16 @@ class LatestEntriesByRegion(LatestEntries):
     link = "/event/"
 
     def title(self, obj):
-        return u"Agendadulibre.qc.ca: Nouveaux évènements pour %s (Québec)" % obj[0].name
+        return u"Agendadulibre.qc.ca: Nouveaux évènements pour %s (Québec)" % obj.name
 
     def description(self, obj):
-        return u"Évènements relatif aux logiciels libre récemment ajouté pour %s (Québec) et à plus grande portée" % obj[0].name
+        return u"Évènements relatif aux logiciels libre récemment ajouté pour %s (Québec) et à plus grande portée" % obj.name
 
-    def get_object(self, params):
-        if len(params) != 1:
-            raise ObjectDoesNotExist
-
-        r = Region.objects.filter(pk__exact=params[0])
-
-        if r:
-            return r
-        else:
-            raise ObjectDoesNotExist
+    def get_object(self, request, region_id):
+        return get_object_or_404(Region, pk=region_id)
 
     def items(self, region):
         if region != None:
-          print region
           q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
         else:
           q = Q()
@@ -250,21 +241,13 @@ class UpcomingEntriesByRegion(UpcomingEntries):
     link = "/event/"
 
     def title(self, obj):
-        return u"Agendadulibre.qc.ca: Évènements à venir pour %s (Québec)" % obj[0].name
+        return u"Agendadulibre.qc.ca: Évènements à venir pour %s (Québec)" % obj.name
 
     def description(self, obj):
-        return u"Évènements relatif aux logiciels libre à venir pour %s (Québec) et à plus grande portée" % obj[0].name
+        return u"Évènements relatif aux logiciels libre à venir pour %s (Québec) et à plus grande portée" % obj.name
 
-    def get_object(self, params):
-        if len(params) != 1:
-            raise ObjectDoesNotExist
-
-        r = Region.objects.filter(pk__exact=params[0])
-
-        if r:
-            return r
-        else:
-            raise ObjectDoesNotExist
+    def get_object(self, request, region_id):
+        return get_object_or_404(Region, pk=region_id)
 
     def items(self, region):
         if region != None:
