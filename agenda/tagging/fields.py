@@ -5,6 +5,8 @@ from django.db.models import signals
 from django.db.models.fields import CharField
 from django.utils.translation import ugettext_lazy as _
 
+from south.modelsinspector import add_introspection_rules
+
 from agenda import settings
 from agenda.tagging.models import Tag
 from agenda.tagging.utils import edit_string_for_tags
@@ -105,3 +107,5 @@ class TagField(CharField):
         defaults = {'form_class': forms.TagField}
         defaults.update(kwargs)
         return super(TagField, self).formfield(**defaults)
+
+add_introspection_rules([], ["^agenda\.tagging\.fields\.TagField"])

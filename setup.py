@@ -26,7 +26,8 @@ setup(name='agenda',
         'vobject',
         'werkzeug',
         'djangorecipe',
-        'django'],
+        'South',
+        'django==1.4.1'],
       entry_points={
         'django.apps': [
             'agenda = agenda'
