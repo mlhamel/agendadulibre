@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+
 {% load humanize %}
 {% load humantime %}
+
+{% block title %}
+<title>{{ event.title }}</title>
+{% endblock title %}
 
 {% block content %}
 <h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
