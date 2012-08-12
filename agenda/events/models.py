@@ -91,14 +91,21 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
 
   contact = models.CharField (max_length=200,
       verbose_name="Personne ressource",
-      help_text="Entrez le nom d'une personne que les visiteurs peuvent contacter pour plus d'information")
+      help_text="Entrez le nom d'une personne que les visiteurs peuvent contacter pour plus d'information"
+      )
   contact_email = models.EmailField (max_length=200,
       verbose_name="Courriel de cette personne",
-      help_text="Entrez le courriel de la personne ressource")
+      help_text="Entrez le courriel de la personne ressource"
+      )
+
+  twitter = models.BooleanField (default=True,
+      verbose_name="Publier sur Twitter",
+      help_text="Voulez-vous que l'Agenda publie votre événement sur Twitter?"
+      )
 
   moderator = models.ForeignKey(User, blank=True, null=True, related_name="moderated_events")
   moderated = models.BooleanField (default=False)
-  decision_time = models.DateTimeField (blank=True,null=True);
+  decision_time = models.DateTimeField (blank=True,null=True)
 
   submiter_email = models.EmailField (max_length=200,
       verbose_name="Votre courriel",
@@ -109,4 +116,3 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
 
   def get_absolute_url (self):
     return "/event/%i/" % self.id
-
