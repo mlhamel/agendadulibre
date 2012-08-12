@@ -105,7 +105,6 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
 
   moderator = models.ForeignKey(User, blank=True, null=True, related_name="moderated_events")
   moderated = models.BooleanField (default=False)
-  decision_time = models.DateTimeField (blank=True,null=True)
 
   submiter_email = models.EmailField (max_length=200,
       verbose_name="Votre courriel",

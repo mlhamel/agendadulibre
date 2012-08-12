@@ -24,7 +24,7 @@ from datetime import datetime
 from django.core.mail import mail_admins
 
 def make_published(self, request, queryset):
-    rows_updated = queryset.update(moderated=True,moderator=request.user,decision_time=datetime.now())
+    rows_updated = queryset.update(moderated=True,moderator=request.user)
     if rows_updated == 1:
         message_bit = u"1 événement a été "
     else:
@@ -34,7 +34,7 @@ def make_published(self, request, queryset):
 make_published.short_description = u"Publier les événements choisis"
 
 def make_unpublished(self, request, queryset):
-    rows_updated = queryset.update(moderated=False,moderator=request.user,decision_time=datetime.now())
+    rows_updated = queryset.update(moderated=False,moderator=request.user)
     if rows_updated == 1:
         message_bit = u"1 événement a été "
     else:
@@ -56,4 +56,3 @@ class CityAdmin(admin.ModelAdmin):
 admin.site.register(Event, EventAdmin)
 admin.site.register(Region)
 admin.site.register(City, CityAdmin)
-
