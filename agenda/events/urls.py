@@ -65,9 +65,6 @@ urlpatterns = patterns('',
     (r'^feeds/latest_region/(?P<region_id>\d+)/$', LatestEntriesByRegion()),
     (r'^feeds/upcoming_region/(?P<region_id>\d+)/$', UpcomingEntriesByRegion()),
 
-    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.Feed',
-       {'feed_dict': feeds}),
-
     (r'^calendar/$', UpcomingEventCalendar()),
     (r'^calendar_region/(?P<region_id>\d+)/$', 'agenda.events.views.calendar_region'),
 
