@@ -13,5 +13,3 @@ DATABASES = {
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-
-ADMIN_MEDIA_PREFIX = '/admin_media/'
