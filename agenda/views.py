@@ -31,7 +31,7 @@ def construction(request):
 
 
 def about(request):
-  return direct_to_template(template='about.html')
+  return direct_to_template(request, template='about.html')
 
 
 def settings (request):
