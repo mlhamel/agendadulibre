@@ -5,8 +5,6 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
-import sys, os
-
 version = '1.0'
 
 setup(name='agenda',
@@ -19,22 +17,23 @@ setup(name='agenda',
       author_email="marrakis@gmail.com",
       license='',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      namespace_packages=['agenda',],
+      namespace_packages=['agenda'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-        'vobject',
-        'werkzeug',
-        'djangorecipe',
-        'South',
-        'django==1.4.1',
-        'tweepy'],
+          'vobject',
+          'werkzeug',
+          'djangorecipe',
+          'South',
+          'django==1.4.1',
+          'django-simple-captcha',
+          'tweepy'],
       entry_points={
-        'django.apps': [
-            'agenda = agenda'
-            ],
-        'console_scripts':[
-            'debug = agenda.command:debug'
-            ],
-        },
-)
+          'django.apps': [
+              'agenda = agenda'
+          ],
+          'console_scripts': [
+              'debug = agenda.command:debug'
+          ],
+      },
+  )

@@ -18,6 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from captcha.fields import CaptchaField
+
 from django import forms
 from agenda.events.models import Event, City, Region
 from agenda.events.widgets import SplitSelectDateTimeWidget
@@ -39,6 +41,8 @@ class EventForm(forms.ModelForm):
         minute_step=15, second_step=30, twelve_hr=False, years=years))
 
     city = forms.ModelChoiceField(City.objects.all(), empty_label=None, label="Ville")
+
+    captcha = CaptchaField()
 
     class Meta:
       model = Event
@@ -72,4 +76,3 @@ class EventForm(forms.ModelForm):
 class RegionFilterForm (forms.Form):
     region = forms.ModelChoiceField(Region.objects.all(), empty_label="Toutes les régions", required=False, label="Région",
         widget=forms.Select(attrs={'onchange':'document.getElementById("filter").submit();'}))
-

@@ -89,7 +89,8 @@ INSTALLED_APPS = (
     'agenda.tagging',
     'agenda.events',
     'agenda.twitter',
-    'south'
+    'south',
+    'captcha',
 )
 
 FORCE_LOWERCASE_TAGS = True
