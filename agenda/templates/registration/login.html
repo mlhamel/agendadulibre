@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Connexion</h2>
+<p>Cette page permet de se connecter à l'agenda libre. Si vous n'avez pas de
+  compte, vous pourrez tout de même poster des événements mais vous ne pourrez
+  pas les regrouper. Si vous voulez vous créer un compte, veuillez cliquer
+  <a href="">ici</a>.
+</p>
+<div id="advises">
+  <h3>Notes importantes</h3>
+  <p>
+    En vous connectant à l'agenda du libre pourrez modifier et consulter vos événements passés et
+    ainsi prendre part en tant qu'organisation à l'annonce d'événements. De
+    plus vous pourrez éventuellement gérer les récurrences.
+  </p>
+  <p>
+    Veuillez noter que:
+    <ul>
+      <li>Vous avez oublier votre mot de passe, <a href="">cliquez ici</a></li>
+      <li>Si vous voulez changer votre mot de passe, <a href="">cliquez ici</a></li>
+      <li>Il n'y a pour l'instant qu'un seul compte utilisateur par organisation</li>
+    </ul>
+  </p>
+</div>
+{% if form.errors %}
+<p>Votre nom d'usager et votre mot passe ne correspond pas. Veuillez essayer de nouveau.</p>
+{% endif %}
+
+<form method="post" action="/login/">
+{% csrf_token %}
+<table class="form" with="100%" style="width: 100%;">
+<tr>
+    <th>{{ form.username.label_tag }}</th>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <th>{{ form.password.label_tag }}</th>
+    <td>{{ form.password }}</td>
+</tr>
+<tr>
+  <th></th>
+  <td>
+    Si vous voulez changer votre mot de passe, <a href="">cliquez ici</a>
+  </td>
+</tr>
+<tr>
+  <th></th>
+  <td>
+    <input type="submit" value="Se connecter" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </td>
+</tr>
+</table>
+</form>
+
+{% endblock %}

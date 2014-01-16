@@ -216,10 +216,10 @@ class LatestEntriesByRegion(LatestEntries):
     def items_description(self, obj):
         return u"Évènements relatif aux logiciels libre récemment ajouté pour %s (Québec) et à plus grande portée" % obj.name
 
-    def get_object(self, request, region_id):        
+    def get_object(self, request, region_id):
         return get_object_or_404(Region, pk=region_id)
 
-    def items(self, region):
+    def items(self, region, tag=None):
         if region != None:
           q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
         else:

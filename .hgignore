@@ -1,6 +1,8 @@
+.DS_Store
 ~
 .pyc
 .installed.cfg
+.ropeproject/
 agenda.egg-info/
 downloads/
 bin/

@@ -21,6 +21,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from agenda.tagging.fields import TagField
+from django.db.models.signals import post_save
 
 class Region (models.Model):
   id = models.PositiveSmallIntegerField(primary_key=True)
@@ -112,6 +113,10 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
 
   def __unicode__ (self):
     return self.title
+
+  @property
+  def mention(self):
+    return "%s %s" % (self.title, self.get_absolute_url())
 
   def get_absolute_url (self):
     return "/event/%i/" % self.id

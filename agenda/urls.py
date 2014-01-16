@@ -31,9 +31,12 @@ admin_media_path = os.path.join(os.path.dirname(admin.__file__), 'media')
 urlpatterns = patterns('',
     (r'^e/', include('agenda.events.urls')),
     (r'^event/', include('agenda.events.urls')),
+    (r'^twitter/', include('agenda.twitter.urls')),
     (r'^$', 'agenda.views.index'),
     (r'^about/$', 'agenda.views.about'),
     (r'^settings/$', 'agenda.views.settings'),
+
+    (r'^login/$', 'django.contrib.auth.views.login'),
 
     (r'^admin/', include(admin.site.urls)),
 
