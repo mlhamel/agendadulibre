@@ -23,6 +23,7 @@ from django.contrib.auth.models import User
 from agenda.tagging.fields import TagField
 from django.db.models.signals import post_save
 
+
 class Region (models.Model):
   id = models.PositiveSmallIntegerField(primary_key=True)
   name = models.CharField (max_length=200)
@@ -103,6 +104,13 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       verbose_name="Publier sur Twitter",
       help_text="Voulez-vous que l'Agenda publie votre événement sur Twitter?"
       )
+
+  banner = models.ImageField(upload_to='banners', default=None)
+
+  spotlight  = models.BooleanField (default=False,
+                                    verbose_name="Mettre en vedette",
+                                    help_text="Voulez-vous que que l'événement soit en vedette sur la page principale de l'Agenda?"
+                                 )
 
   moderator = models.ForeignKey(User, blank=True, null=True, related_name="moderated_events")
   moderated = models.BooleanField (default=False)

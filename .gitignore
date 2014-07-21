@@ -19,3 +19,4 @@ agendadulibre
 settings.py
 production.py
 development.py
+agenda/media/banners/

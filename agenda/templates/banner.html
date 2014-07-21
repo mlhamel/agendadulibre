@@ -1,0 +1,7 @@
+{% if banner_event %}
+  <p style="text-align: center;">
+    <a href="{{ banner_event.get_absolute_url }}">
+      <img src="/media/{{ banner_event.banner.url }}" />
+    </a>
+  </p>
+{% endif %}

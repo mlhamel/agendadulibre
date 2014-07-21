@@ -47,7 +47,8 @@ class EventForm(forms.ModelForm):
     class Meta:
       model = Event
       exclude = ('submission_time', 'updated_time', 'decision_time',
-                 'moderator', 'moderated', 'latitude', 'longitude')
+                 'moderator', 'moderated', 'latitude', 'longitude',
+                 'banner', 'spotlight')
 
     def clean(self):
       cleaned_data = self.cleaned_data
