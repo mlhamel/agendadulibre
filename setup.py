@@ -17,7 +17,6 @@ setup(name='agenda',
       author_email="marrakis@gmail.com",
       license='',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      namespace_packages=['agenda'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
