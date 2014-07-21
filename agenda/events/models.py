@@ -105,7 +105,7 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       help_text="Voulez-vous que l'Agenda publie votre événement sur Twitter?"
       )
 
-  banner = models.ImageField(upload_to='banners', default=None)
+  banner = models.ImageField(upload_to='banners', default=None, null=True)
 
   spotlight  = models.BooleanField (default=False,
                                     verbose_name="Mettre en vedette",
