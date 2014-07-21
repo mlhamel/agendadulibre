@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-  {% block title %}
-  <title>L'Agenda du libre du Québec</title>
-  {% endblock title %}
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="google-site-verification" content="rz4d48R0H-Yiap5gO405faHZiTN-MiLNkkmlbhjsNSY" />
-  <link rel="stylesheet" type="text/css" href="/media/moderne.css" title="Moderne" />
-  <link rel="shortcut icon" type="image/x-icon" href="/media/img/favicon.png" />
-{% block feeds %}
-{% endblock feeds %}
-  <link rel="alternate" href="/event/feeds/latest/" title="Agenda du libre du Québec, nouveaux évènements" type="application/rss+xml" />
-  <link rel="alternate" href="/event/feeds/upcoming/" title="Agenda du libre du Québec, prochains évènements" type="application/rss+xml" />
-  <link rel="alternate" href="/event/calendar/" title="Agenda du libre du Québec, calendrier numérique" type="text/calendar" />
-</head>
+  <head>
+    {% block title %}
+      <title>L'Agenda du libre du Québec</title>
+    {% endblock title %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="google-site-verification" content="rz4d48R0H-Yiap5gO405faHZiTN-MiLNkkmlbhjsNSY" />
+    <link rel="stylesheet" type="text/css" href="/media/moderne.css" title="Moderne" />
+    <link rel="shortcut icon" type="image/x-icon" href="/media/img/favicon.png" />
+    {% block feeds %}
+    {% endblock feeds %}
+    <link rel="alternate" href="/event/feeds/latest/" title="Agenda du libre du Québec, nouveaux évènements" type="application/rss+xml" />
+    <link rel="alternate" href="/event/feeds/upcoming/" title="Agenda du libre du Québec, prochains évènements" type="application/rss+xml" />
+    <link rel="alternate" href="/event/calendar/" title="Agenda du libre du Québec, calendrier numérique" type="text/calendar" />
+  </head>
 
-<body>
-<div class="header">
-  <a href="/"><img class="logo" src="/media/img/logo.png"/></a>
-  <div class="actions">
-    {% block actions %}
-    {% endblock %}
-  </div>
-  <h1><a href="/">L'Agenda du libre du Québec</a></h1>
-  <p id="subtitle">Tous les événements du Québec à propos de l'informatique libre</p>
-</div>
-<div class="main">
-{% block content %}
-{% endblock content %}
-</div>
-<div class="footer">
-  <p>
-  <a href="{% url agenda.views.index %}">Agenda</a> -
-  <a href="{% url agenda.views.about %}">À propos</a> -
-<!--  <a href="{% url django.contrib.auth.views.login %}">Connexion</a> -->
-  <a href="{% url agenda.events.views.propose %}">Proposer un événement</a> -
-  <a href="{% url agenda.events.views.feed_list %}">Fils RSS et iCal</a> -
-  <a href="{% url agenda.events.views.stats %}">Statistiques</a> -
-  <a href="mailto:marrakis@gmail.com">Contact</a>
-  </p>
+  <body>
+    <div class="header">
+      <a href="/"><img class="logo" src="/media/img/logo.png"/></a>
+      <div class="actions">
+        {% block actions %}
+        {% endblock %}
+      </div>
+      <h1><a href="/">L'Agenda du libre du Québec</a></h1>
+      <p id="subtitle">Tous les événements du Québec à propos de l'informatique libre</p>
+    </div>
+    <div class="main">
+      {% block content %}
+      {% endblock content %}
+    </div>
+    <div class="footer">
+      <p>
+        <a href="{% url agenda.views.index %}">Agenda</a> -
+        <a href="{% url agenda.views.about %}">À propos</a> -
+        <!--  <a href="{% url django.contrib.auth.views.login %}">Connexion</a> -->
+        <a href="{% url agenda.events.views.propose %}">Proposer un événement</a> -
+        <a href="{% url agenda.events.views.feed_list %}">Fils RSS et iCal</a> -
+        <a href="{% url agenda.events.views.stats %}">Statistiques</a> -
+        <a href="mailto:marrakis@gmail.com">Contact</a>
+      </p>
 
-<br />
-</div>
-</body>
+      <br />
+    </div>
+  </body>
 </html>
