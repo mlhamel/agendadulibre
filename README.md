@@ -42,7 +42,9 @@ développement):
 
     $ bin/django syncdb
     $ bin/django migrate
-
+    $ sqlite3 agendadulibre < agenda/events/sql/region.sql
+    $ sqlite3 agendadulibre < agenda/events/sql/city.sql
+    
 Et voilà, et pour lancer l'agenda:
 
     $ bin/django runserver
