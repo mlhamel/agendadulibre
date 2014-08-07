@@ -24,7 +24,7 @@ setup(name='agenda',
           'werkzeug',
           'djangorecipe',
           'South',
-          'django==1.4.1',
+          'django==1.4.13',
           'django-simple-captcha',
           'tweepy'],
       entry_points={
