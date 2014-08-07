@@ -1,11 +1,12 @@
 from django.db.models import get_model
-from django.template import Library, Node, TemplateSyntaxError, Variable, resolve_variable
+from django.template import Library, Node, TemplateSyntaxError, Variable
 from django.utils.translation import ugettext as _
 
 from agenda.tagging.models import Tag, TaggedItem
 from agenda.tagging.utils import LINEAR, LOGARITHMIC
 
 register = Library()
+
 
 class TagsForModelNode(Node):
     def __init__(self, model, context_var, counts):
@@ -16,8 +17,10 @@ class TagsForModelNode(Node):
     def render(self, context):
         model = get_model(*self.model.split('.'))
         if model is None:
-            raise TemplateSyntaxError(_('tags_for_model tag was given an invalid model: %s') % self.model)
-        context[self.context_var] = Tag.objects.usage_for_model(model, counts=self.counts)
+            message = _('tags_for_model tag was given an invalid model: %s')
+            raise TemplateSyntaxError(message % self.model)
+        tag = Tag.objects.usage_for_model(model, counts=self.counts)
+        context[self.context_var] = tag
         return ''
 
 class TagCloudForModelNode(Node):
@@ -29,7 +32,8 @@ class TagCloudForModelNode(Node):
     def render(self, context):
         model = get_model(*self.model.split('.'))
         if model is None:
-            raise TemplateSyntaxError(_('tag_cloud_for_model tag was given an invalid model: %s') % self.model)
+            message = _('tag_cloud_for_model tag was given an invalid model: %s')
+            raise TemplateSyntaxError(message % self.model)
         context[self.context_var] = \
             Tag.objects.cloud_for_model(model, **self.kwargs)
         return ''

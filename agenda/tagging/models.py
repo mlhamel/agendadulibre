@@ -7,23 +7,21 @@ try:
 except NameError:
     from sets import Set as set
 
+
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import connection, models
-from django.db.models.query import QuerySet
 from django.utils.translation import ugettext_lazy as _
 
 from agenda import settings
-from agenda.tagging.utils import calculate_cloud, get_tag_list, get_queryset_and_model, parse_tag_input
-from agenda.tagging.utils import LOGARITHMIC
+from agenda.tagging.utils import calculate_cloud, get_tag_list, parse_tag_input
+from agenda.tagging.utils import LOGARITHMIC, get_queryset_and_model
 
 qn = connection.ops.quote_name
 
-############
-# Managers #
-############
 
 class TagManager(models.Manager):
+
     def update_tags(self, obj, tag_names):
         """
         Update tags associated with an object.
@@ -55,9 +53,11 @@ class TagManager(models.Manager):
         """
         tag_names = parse_tag_input(tag_name)
         if not len(tag_names):
-            raise AttributeError(_('No tags were given: "%s".') % tag_name)
+            raise AttributeError(_('No tags were given: "%s".')
+                                 % tag_name)
         if len(tag_names) > 1:
-            raise AttributeError(_('Multiple tags were given: "%s".') % tag_name)
+            raise AttributeError(_('Multiple tags were given: "%s".')
+                                 % tag_name)
         tag_name = tag_names[0]
         if settings.FORCE_LOWERCASE_TAGS:
             tag_name = tag_name.lower()
@@ -75,7 +75,9 @@ class TagManager(models.Manager):
         return self.filter(items__content_type__pk=ctype.pk,
                            items__object_id=obj.pk)
 
-    def _get_usage(self, model, counts=False, min_count=None, extra_joins=None, extra_criteria=None, params=None):
+    def _get_usage(self, model, counts=False, min_count=None,
+                   extra_joins=None,  extra_criteria=None,
+                   params=None):
         """
         Perform the custom SQL query for ``usage_for_model`` and
         ``usage_for_queryset``.
@@ -112,7 +114,8 @@ class TagManager(models.Manager):
             params.append(min_count)
 
         cursor = connection.cursor()
-        cursor.execute(query % (extra_joins, extra_criteria, min_count_sql), params)
+        cursor.execute(query % (extra_joins, extra_criteria, min_count_sql),
+                       params)
         tags = []
         for row in cursor.fetchall():
             t = self.model(*row[:2])
@@ -168,7 +171,8 @@ class TagManager(models.Manager):
             extra_criteria = 'AND %s' % where
         else:
             extra_criteria = ''
-        return self._get_usage(queryset.model, counts, min_count, extra_joins, extra_criteria, params)
+        return self._get_usage(queryset.model, counts, min_count, extra_joins,
+                               extra_criteria, params)
 
     def related_for_model(self, tags, model, counts=False, min_count=None):
         """
@@ -256,6 +260,7 @@ class TagManager(models.Manager):
         tags = list(self.usage_for_model(model, counts=True, filters=filters,
                                          min_count=min_count))
         return calculate_cloud(tags, steps, distribution)
+
 
 class TaggedItemManager(models.Manager):
     """
@@ -439,9 +444,6 @@ class TaggedItemManager(models.Manager):
         else:
             return []
 
-##########
-# Models #
-##########
 
 class Tag(models.Model):
     """
@@ -458,6 +460,7 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class TaggedItem(models.Model):
     """

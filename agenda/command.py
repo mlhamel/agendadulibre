@@ -3,6 +3,7 @@ from django.core.handlers.wsgi import WSGIHandler
 
 import os
 
+
 def debug(host='0.0.0.0', port=8976):
     """ """
     # This is only needed for Django versions < [7537]:

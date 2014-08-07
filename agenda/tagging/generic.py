@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 
+
 def fetch_content_objects(tagged_items, select_related_for=None):
     """
     Retrieves ``ContentType`` and content objects for the given list of
@@ -24,12 +25,16 @@ def fetch_content_objects(tagged_items, select_related_for=None):
 
     # Retrieve content types and content objects in bulk
     content_types = ContentType._default_manager.in_bulk(objects.keys())
+
     for content_type_pk, object_pks in objects.iteritems():
         model = content_types[content_type_pk].model_class()
         if content_types[content_type_pk].model in select_related_for:
-            objects[content_type_pk] = model._default_manager.select_related().in_bulk(object_pks)
+            content = model._default_manager.select_related()
+            content = content.in_bulk(object_pks)
+            objects[content_type_pk] = content
         else:
-            objects[content_type_pk] = model._default_manager.in_bulk(object_pks)
+            content = model._default_manager.in_bulk(object_pks)
+            objects[content_type_pk] = content
 
     # Set content types and content objects in the appropriate cache
     # attributes, so accessing the 'content_type' and 'object'

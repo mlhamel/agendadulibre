@@ -16,25 +16,23 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-from django.shortcuts import render_to_response, HttpResponseRedirect
+from django.shortcuts import render_to_response
 from django.views.generic.simple import redirect_to, direct_to_template
 from datetime import date
 
-def index (request):
-  today = date.today ()
-  return redirect_to (request, url="/event/%d/%d/" % (today.year, today.month))
+
+def index(request):
+    today = date.today()
+    return redirect_to(request, url="/event/%d/%d/" % (today.year, today.month))
 
 
 def construction(request):
-  return render_to_response("construction.html", {
-      })
+    return render_to_response("construction.html", dict())
 
 
 def about(request):
-  return direct_to_template(request, template='about.html')
+    return direct_to_template(request, template='about.html')
 
 
-def settings (request):
-  return render_to_response('events/settings.html', {
-
-      })
+def settings(request):
+    return render_to_response('events/settings.html', dict())

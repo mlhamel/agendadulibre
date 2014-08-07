@@ -16,9 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+from django.conf.urls.defaults import url, include, patterns
 from django.conf import settings
 from django.contrib import admin
 
@@ -41,12 +39,10 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     (r'^admin_media/(.*)', 'django.views.static.serve',
-         {'document_root' : admin_media_path, 'show_indexes' : True}),
+         {'document_root': admin_media_path, 'show_indexes' : True}),
 
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
          {'document_root': settings.MEDIA_ROOT}),
 )
 
-urlpatterns += patterns('',
-    url(r'^captcha/', include('captcha.urls')),
-)
+urlpatterns += patterns('', url(r'^captcha/', include('captcha.urls')))

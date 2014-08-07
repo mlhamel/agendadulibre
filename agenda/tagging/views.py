@@ -6,10 +6,11 @@ from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_list
 
 from agenda.tagging.models import Tag, TaggedItem
-from agenda.tagging.utils import get_tag, get_queryset_and_model
+from agenda.tagging.utils import get_tag
+
 
 def tagged_object_list(request, queryset_or_model=None, tag=None,
-        related_tags=False, related_tag_counts=True, **kwargs):
+                       related_tags=False, related_tag_counts=True, **kwargs):
     """
     A thin wrapper around
     ``django.views.generic.list_detail.object_list`` which creates a
