@@ -100,3 +100,8 @@ FORCE_SCRIPT_NAME = ''
 MAX_TAG_LENGTH = 255
 
 FROM_EMAIL = "info@agendadulibre.qc.ca"
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

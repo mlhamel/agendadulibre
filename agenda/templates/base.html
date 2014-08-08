@@ -9,7 +9,15 @@
     {% endblock title %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="google-site-verification" content="rz4d48R0H-Yiap5gO405faHZiTN-MiLNkkmlbhjsNSY" />
+    {% block css %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+
     <link rel="stylesheet" type="text/css" href="/media/moderne.css" title="Moderne" />
+    {% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="/media/img/favicon.png" />
     {% block feeds %}
     {% endblock feeds %}
@@ -19,37 +27,64 @@
   </head>
 
   <body>
-    <div class="header">
-      <a href="/"><img class="logo" src="/media/img/logo.png"/></a>
-      <div class="actions">
-        {% block actions %}
-        {% endblock %}
+    <div class="container">
+      <div class="header row">
+	<div class="logo col-md-1">
+	  <a href="/" class="col-md-1">
+	    <img class="logo" src="/media/img/logo.png"/>
+	  </a>
+	</div>
+	<div class="title col-md-8">
+	  <h1 class="page-title" class="col-md-11">
+	    <a href="/">L'Agenda du libre du Québec</a>
+	  </h1>
+	  <p id="subtitle">Tous les événements du Québec à propos de l'informatique libre</p>
+	</div>
+	<div class="actions col-md-3">
+          {% block actions %}
+          {% endblock %}
+	</div>
       </div>
-      <h1><a href="/">L'Agenda du libre du Québec</a></h1>
-      <p id="subtitle">Tous les événements du Québec à propos de l'informatique libre</p>
-    </div>
-    <div class="main">
-      <p style="text-align: center;">
-        <a href="http://www.agendadulibre.qc.ca/event/954/">
-          <img src="/media/img/banniere-hackathon-agenda-du-libre.jpg" />
-        </a>
-      </p>
-      {% block content %}
-      {% endblock content %}
-    </div>
-    <div class="footer">
-      <p>
-        <a href="{% url agenda.views.index %}">Agenda</a> -
-        <a href="{% url agenda.views.about %}">À propos</a> -
-        <!--  <a href="{% url django.contrib.auth.views.login %}">Connexion</a> -->
-        <a href="{% url agenda.events.views.propose %}">Proposer un événement</a> -
-        <a href="{% url agenda.events.views.feed_list %}">Fils RSS et iCal</a> -
-        <a href="{% url agenda.events.views.stats %}">Statistiques</a> -
-        <a href="mailto:marrakis@gmail.com">Contact</a>
-      </p>
+      <div class="row promo">
+	<p style="text-align: center;" class="col-md-12">
+          <a href="http://www.agendadulibre.qc.ca/event/954/">
+            <img src="/media/img/banniere-hackathon-agenda-du-libre.jpg" />
+          </a>
+	</p>
+      </div>
+      <div class="row main">
+	{% block content %}
+	{% endblock content %}
+      </div>
+      <div class="footer row text-center">
+	<ul class="col-md-8 col-md-offset-2 list-inline">
+	  <li>
+            <a href="{% url agenda.views.index %}">Agenda</a>
+	  </li>
+	  <li>
+            <a href="{% url agenda.views.about %}">À propos</a>
+            <!--  <a href="{% url django.contrib.auth.views.login %}">Connexion</a> -->
+	  </li>
+	  <li>
+            <a href="{% url agenda.events.views.propose %}">Proposer un événement</a>
+	  </li>
+	  <li>
+            <a href="{% url agenda.events.views.feed_list %}">Fils RSS et iCal</a>
+	  </li>
+	  <li>
+            <a href="{% url agenda.events.views.stats %}">Statistiques</a>
+	  </li>
+	  <li>
+            <a href="mailto:marrakis@gmail.com">Contact</a>
+	  </li>
+	</p>
 
-      <br />
+	<br />
+      </div>
+      {% block before_end_body %}
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      {% endblock %}
+      <!-- Latest compiled and minified JavaScript -->
     </div>
-    {% block before_end_body %}{% endblock %}
   </body>
 </html>

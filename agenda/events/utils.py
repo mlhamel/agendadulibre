@@ -1,4 +1,4 @@
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.models import User
 from django.conf import settings
 

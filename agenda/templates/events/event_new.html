@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
+{% block css %}
+{{ block.super }}
+{% endblock %}
+
 {% block before_end_body %}
+{{ block.super }}
 <script  type="text/javascript" src="/media/tiny_mce/tiny_mce.js"></script>
 <script  type="text/javascript" src="/media/js/event_new.js"></script>
 {% endblock %}
@@ -97,4 +102,3 @@
 </table>
 </form>
 {% endblock %}
-
