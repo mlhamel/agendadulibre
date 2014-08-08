@@ -17,8 +17,8 @@
 {{ event.address}} <br/>
 {{ event.city }}, Québec<br/>
 <span class="not-important">
-Voir sur <a href="http://maps.google.ca/maps?q={{ event.address }},{{event.city}},Quebec&oe=utf-8&hl=fr">Google Maps</a> ou
-<a href="http://cf.maps.yahoo.com/?q1={{ event.address }},{{event.city}},Quebec,Canada">Yahoo Maps</a></span>
+Voir sur <a href="https://nominatim.openstreetmap.org/search?street={{ event.address }}&city={{event.city}}&state=Québec&country=Canada">OpenStreetMap</a> (beta) ou
+<a href="http://maps.google.ca/maps?q={{ event.address }},{{event.city}},Quebec&oe=utf-8&hl=fr">Google Maps</a></span>
 
 <h3>Description</h3>
 {% autoescape off %}
