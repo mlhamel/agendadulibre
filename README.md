@@ -2,15 +2,16 @@ Présentation
 ============
 
 L'Agenda du libre du Québec est une copie conforme de l'agendadulibre.org
-(France). Puisque ce dernier est disponible sous licence GPL,  la mise en place
- de ce clône a été plutôt rapide.  Plusieurs textes de la version québécoise
+(France). Puisque ce dernier est disponible sous licence GPL, la mise en place
+ de ce clône a été plutôt rapide. Plusieurs textes de la version québécoise
 proviennent de la version française.
 
 Dans les détails, la version québécoise est une réimplémentation en Django de
-leur version en PHP. Ce changement technologique s'est avéré  nécessaire dû au
+leur version en PHP. Ce changement technologique s'est avéré nécessaire dû au
 fait que la version de France n'a pas de séparation MVC, rendant difficile la
-création d'une version avec des textes différents. Néanmoins, le principe de
-fonctionnement est idéal et il a été reproduit avec minutie.
+création d'une version avec des textes différents. (Note: la version française 
+a été réfaite en Ruby en 2014.) Néanmoins, le principe de fonctionnement est 
+idéal et il a été reproduit avec minutie.
 
 Cette version est disponible sous licence GNU Affero General Public License.
 C'est une licence qui est plus restritive que la GNU General Public License
@@ -28,8 +29,8 @@ Mathieu Leduc-Hamel avec la collaboration, pour la modération, de
 Installation
 ========
 
-Pour installer l'agenda du libre du Québec vous n'avez suivre les différentes
-étapes suivantes, toutefois, assurez-vous d'avoir Python 2.7.x:
+Pour installer l'Agenda du libre du Québec, vous n'avez qu'à suivre les différentes
+étapes suivantes. (Prérequis: Python 2.7.x, git, sqlite3) :
 
     $ git clone https://github.com/mlhamel/agendadulibre.git
     $ cd agendadulibre
@@ -89,5 +90,4 @@ sur les processus qui roulent:
     
 Vous n'avez qu'à ouvrir l'url suivante: http://127.0.0.1:8000 dans votre
 navigateur !
-
 
