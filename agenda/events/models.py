@@ -20,8 +20,11 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from agenda.tagging.fields import TagField
 from django.db.models.signals import post_save
+
+from agenda.tagging.fields import TagField
+from agenda.lib.geocode import GoogleMapsGeocoder
+from agenda.lib.bbox import boundingBox
 
 
 class Region (models.Model):
@@ -53,6 +56,8 @@ class Event (models.Model):
       ('N', 'Nationale'),
       ('I', 'Internationale'),
   )
+
+  WIDTH = 0.5
 
   title = models.CharField (max_length=200,
       verbose_name="titre",
@@ -119,6 +124,10 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       verbose_name="Votre courriel",
       help_text="Entrez votre courriel, vous serez responsable de cette entrée dans l'Agenda. Ce courriel ne sera pas rendu public. Un modérateur pourrait avoir besoin de vous contacter.")
 
+  def __init__(self, *args, **kwargs):
+    super(Event, self).__init__(*args, **kwargs)
+    self._disable_signals = False
+
   def __unicode__ (self):
     return self.title
 
@@ -126,5 +135,28 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
   def mention(self):
     return "%s %s" % (self.title, self.get_absolute_url())
 
+  @property
+  def bbox(self):
+    return boundingBox(self.latitude, self.longitude, self.WIDTH)
+
+  def save_without_signals(self):
+     self._disable_signals = True
+     self.save()
+     self._disable_signals = False
+
+  @staticmethod
+  def geocode(sender, instance, **kwargs):
+    if not instance._disable_signals:
+      coder = GoogleMapsGeocoder()
+      try:
+        results = coder.geocode(u"%s %s" % (instance.address, instance.city.name))
+      except Exception:
+        return
+      instance.latitude = results.get("latitude")
+      instance.longitude = results.get("longitude")
+      instance.save_without_signals()
+
   def get_absolute_url (self):
     return "/event/%i/" % self.id
+
+post_save.connect(Event.geocode, sender=Event, dispatch_uid="geocode_event")

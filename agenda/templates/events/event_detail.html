@@ -11,15 +11,16 @@
 <h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
 <b class="date">{{ event.start_time|event_time:event.end_time }}</b><br/>
 <br/>
+{% if event.latitude and event.longitude %}
+  <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+          src="http://www.openstreetmap.org/export/embed.html?bbox={{ event.bbox|join:'%2C' }}&amp;layer=mapnik&amp;marker={{ event.latitude }}%2C{{ event.longitude }}"
+          style="border: 1px solid black"></iframe><br/><small><a href="http://www.openstreetmap.org/?mlat={{ event.latitude }}&mlon={{ event.longitude }}#map=19/{{ event.latitude }}/{{ event.longitude }}">Voir une carte plus détaillée</a></small><br/>
+{% endif %}
 {% if event.venue %}
 <b>{{ event.venue}}</b><br/>
 {% endif %}
 {{ event.address}} <br/>
 {{ event.city }}, Québec<br/>
-<span class="not-important">
-Voir sur <a href="https://nominatim.openstreetmap.org/search?street={{ event.address }}&city={{event.city}}&state=Québec&country=Canada">OpenStreetMap</a> (beta) ou
-<a href="http://maps.google.ca/maps?q={{ event.address }},{{event.city}},Quebec&oe=utf-8&hl=fr">Google Maps</a></span>
-
 <h3>Description</h3>
 {% autoescape off %}
 {{ event.description }}

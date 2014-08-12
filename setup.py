@@ -20,13 +20,15 @@ setup(name='agenda',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'vobject',
-          'werkzeug',
           'djangorecipe',
-          'South',
           'django==1.4.13',
           'django-simple-captcha',
-          'tweepy'],
+          'requests',
+          'South',
+          'tweepy',
+          'unidecode',
+          'vobject',
+          'werkzeug',],
       entry_points={
           'django.apps': [
               'agenda = agenda'
