@@ -46,12 +46,11 @@
     </div>
     <div class="footer">
       <p>
-        <a href="{% url agenda.views.index %}">Agenda</a> -
-        <a href="{% url agenda.views.about %}">À propos</a> -
-        <!--  <a href="{% url django.contrib.auth.views.login %}">Connexion</a> -->
-        <a href="{% url agenda.events.views.propose %}">Proposer un événement</a> -
-        <a href="{% url agenda.events.views.feed_list %}">Fils RSS et iCal</a> -
-        <a href="{% url agenda.events.views.stats %}">Statistiques</a> -
+        <a href="{% url 'index' %}">Agenda</a> -
+        <a href="{% url 'about' %}">À propos</a> -
+        <a href="{% url 'propose' %}">Proposer un événement</a> -
+        <a href="{% url 'feed_list' %}">Fils RSS et iCal</a> -
+        <a href="{% url 'stats' %}">Statistiques</a> -
         <a href="mailto:marrakis@gmail.com">Contact</a>
       </p>
 

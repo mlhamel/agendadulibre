@@ -17,21 +17,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 from django.shortcuts import render_to_response
-from django.views.generic.simple import redirect_to, direct_to_template
+from django.views.generic import TemplateView, RedirectView
 from datetime import date
 
 
-def index(request):
+class IndexView(RedirectView):
     today = date.today()
-    return redirect_to(request, url="/event/%d/%d/" % (today.year, today.month))
+    url = "/event/%d/%d/" % (today.year, today.month)
+
+
+class AboutView(TemplateView):
+    template = 'about.html'
 
 
 def construction(request):
     return render_to_response("construction.html", dict())
-
-
-def about(request):
-    return direct_to_template(request, template='about.html')
 
 
 def settings(request):

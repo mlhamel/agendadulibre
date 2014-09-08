@@ -16,7 +16,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-from django.conf.urls.defaults import url, include, patterns
+
+from agenda.views import AboutView, IndexView
+
+from django.conf.urls import url, include, patterns
 from django.conf import settings
 from django.contrib import admin
 
@@ -24,14 +27,15 @@ import os
 
 admin.autodiscover()
 
+
 admin_media_path = os.path.join(os.path.dirname(admin.__file__), 'media')
 
 urlpatterns = patterns('',
     (r'^e/', include('agenda.events.urls')),
     (r'^event/', include('agenda.events.urls')),
     (r'^twitter/', include('agenda.twitter.urls')),
-    (r'^$', 'agenda.views.index'),
-    (r'^about/$', 'agenda.views.about'),
+    url(r'^$', IndexView.as_view(), name="index"),
+    url(r'^about/$', AboutView.as_view(), name="about"),
     (r'^settings/$', 'agenda.views.settings'),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^login/$', 'django.contrib.auth.views.login'),

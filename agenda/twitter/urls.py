@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 
 urlpatterns = patterns('',
 )

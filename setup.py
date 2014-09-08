@@ -21,7 +21,7 @@ setup(name='agenda',
       zip_safe=False,
       install_requires=[
           'djangorecipe',
-          'django==1.4.13',
+          'django==1.6.5',
           'django-simple-captcha',
           'requests',
           'simplejson',
