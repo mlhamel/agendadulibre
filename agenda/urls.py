@@ -33,7 +33,7 @@ urlpatterns = patterns('',
     (r'^$', 'agenda.views.index'),
     (r'^about/$', 'agenda.views.about'),
     (r'^settings/$', 'agenda.views.settings'),
-
+    (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^login/$', 'django.contrib.auth.views.login'),
 
     (r'^admin/', include(admin.site.urls)),

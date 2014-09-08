@@ -1,4 +1,5 @@
 {% load banner %}
+{% load i18n %}
 
 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -27,6 +28,17 @@
       </div>
       <h1><a href="/">L'Agenda du libre du Québec</a></h1>
       <p id="subtitle">Tous les événements du Québec à propos de l'informatique libre</p>
+      <form action="/i18n/setlang/" method="post">{% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}" />
+        <select name="language">
+          {% get_current_language as LANGUAGE_CODE %}
+          {% get_available_languages as LANGUAGES %}
+          {% for code, language in LANGUAGES %}
+          <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected="selected"{% endif %}>{{ language }} ({{ code }})</option>
+          {% endfor %}
+        </select>
+<input type="submit" value="Go" />
+      </form>
     </div>
     <div class="main">
       {% block content %}
