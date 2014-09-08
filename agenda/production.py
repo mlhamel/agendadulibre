@@ -12,4 +12,5 @@ DATABASES = {
     }
 
 DEBUG = False
+ENABLE_MAIL = True
 TEMPLATE_DEBUG = DEBUG
