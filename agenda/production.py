@@ -14,3 +14,5 @@ DATABASES = {
 DEBUG = False
 ENABLE_MAIL = True
 TEMPLATE_DEBUG = DEBUG
+ALLOWED_HOSTS = ["www.agendadulibre.qc.ca",
+                 "agendadulibre.qc.ca"]
