@@ -63,7 +63,7 @@ urlpatterns = patterns('',
     url(r'^$', EventList.as_view()),
     url(r'^new/$', 'agenda.events.views.propose', name="propose"),
     url(r'^new/thanks/$', ThanksView.as_view()),
-    url(r'^(?P<object_id>\d+)/$', EventDetail.as_view()),
+    url(r'^(?P<pk>\d+)/$', EventDetail.as_view()),
     url(r'^(?P<year>\d+)/(?P<month>\d+)/$', 'agenda.events.views.month',
         name="month_view"),
 
