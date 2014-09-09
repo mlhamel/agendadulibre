@@ -36,7 +36,7 @@ class EventDetail(DetailView):
 
 
 class ThanksView(TemplateView):
-    template = 'events/event_thanks.html'
+    template_name = 'events/event_thanks.html'
 
 
 general_info = {
