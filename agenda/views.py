@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-from django.shortcuts import render_to_response
 from django.views.generic import TemplateView, RedirectView
 from datetime import date
 
@@ -27,12 +26,12 @@ class IndexView(RedirectView):
 
 
 class AboutView(TemplateView):
-    template = 'about.html'
+    template_name = 'about.html'
 
 
-def construction(request):
-    return render_to_response("construction.html", dict())
+class ConstructionView(TemplateView):
+    template_name = "construction.html"
 
 
-def settings(request):
-    return render_to_response('events/settings.html', dict())
+class SettingsView(TemplateView):
+    template_name = "events/settings.html"

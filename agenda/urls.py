@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from agenda.views import AboutView, IndexView
+from agenda.views import AboutView, IndexView, SettingsView
 
 from django.conf.urls import url, include, patterns
 from django.conf import settings
@@ -36,7 +36,7 @@ urlpatterns = patterns('',
     (r'^twitter/', include('agenda.twitter.urls')),
     url(r'^$', IndexView.as_view(), name="index"),
     url(r'^about/$', AboutView.as_view(), name="about"),
-    (r'^settings/$', 'agenda.views.settings'),
+    (r'^settings/$', SettingsView.as_view()),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^login/$', 'django.contrib.auth.views.login'),
 
