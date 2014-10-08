@@ -6,7 +6,7 @@
 
   <head>
     {% block title %}
-      <title>L'Agenda du libre du Québec</title>
+      <title>{% trans "L'Agenda du libre du Québec" %}</title>
     {% endblock title %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="google-site-verification" content="rz4d48R0H-Yiap5gO405faHZiTN-MiLNkkmlbhjsNSY" />
@@ -14,9 +14,18 @@
     <link rel="shortcut icon" type="image/x-icon" href="/media/img/favicon.png" />
     {% block feeds %}
     {% endblock feeds %}
-    <link rel="alternate" href="/event/feeds/latest/" title="Agenda du libre du Québec, nouveaux évènements" type="application/rss+xml" />
-    <link rel="alternate" href="/event/feeds/upcoming/" title="Agenda du libre du Québec, prochains évènements" type="application/rss+xml" />
-    <link rel="alternate" href="/event/calendar/" title="Agenda du libre du Québec, calendrier numérique" type="text/calendar" />
+    <link rel="alternate"
+          href="/event/feeds/latest/"
+          title="{% trans "Agenda du libre du Québec, nouveaux évènements" %}"
+          type="application/rss+xml" />
+    <link rel="alternate"
+          href="/event/feeds/upcoming/"
+          title="{% trans "Agenda du libre du Québec, prochains évènements" %}"
+          type="application/rss+xml" />
+    <link rel="alternate"
+          href="/event/calendar/"
+          title="{% trans "Agenda du libre du Québec, calendrier numérique" %}"
+          type="text/calendar" />
   </head>
 
   <body>
@@ -39,8 +48,10 @@
           </form>
         </div>
       </div>
-      <h1><a href="/">L'Agenda du libre du Québec</a></h1>
-      <p id="subtitle">Tous les événements du Québec à propos de l'informatique libre</p>
+      <h1>
+        <a href="/">{% trans "L'Agenda du libre du Québec" %}</a>
+      </h1>
+      <p id="subtitle">{% trans "Tous les événements du Québec à propos de l'informatique libre" %}</p>
     </div>
     <div class="main">
       {% block content %}
@@ -48,14 +59,25 @@
     </div>
     <div class="footer">
       <p>
-        <a href="{% url 'index' %}">Agenda</a> -
-        <a href="{% url 'about' %}">À propos</a> -
-        <a href="{% url 'propose' %}">Proposer un événement</a> -
-        <a href="{% url 'feed_list' %}">Fils RSS et iCal</a> -
-        <a href="{% url 'stats' %}">Statistiques</a> -
-        <a href="mailto:marrakis@gmail.com">Contact</a>
+        <a href="{% url 'index' %}">
+          {% trans "Agenda" %}
+        </a> -
+        <a href="{% url 'about' %}">
+          {% trans "À propos" %}
+        </a> -
+        <a href="{% url 'propose' %}">
+          {% trans "Proposer un événement" %}
+        </a> -
+        <a href="{% url 'feed_list' %}">
+          {% trans "Fils RSS et iCal" %}
+        </a> -
+        <a href="{% url 'stats' %}">
+          {% trans "Statistiques" %}
+        </a> -
+        <a href="mailto:marrakis@gmail.com">
+          {% trans "Contact" %}
+        </a>
       </p>
-
       <br />
     </div>
     {% block before_end_body %}{% endblock %}
