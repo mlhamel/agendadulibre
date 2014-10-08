@@ -1,49 +1,73 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block content %}
-<h2>À propos de l'Agenda du libre du Québec</h2>
-<h3>Pourquoi?</h3>
-<p>Auparavant, linux-quebec.org offrait un calendrier des activités pouvant toucher aux logiciels libres mais surtout liées à Linux.  Depuis que linux-quebec.org n'existe plus, il n'y avait plus de ressource en ligne pour faire la promotion d'un évènement libre au Québec. C'est après une requête pour un flux iCal des événements Python sur la liste de <a href="http://montrealpython.org/">MontréalPython</a> que <a href="http://www.pierlux.com">Pierre-Luc Beaudoin</a> a décidé de fonder ce site.</p>
+  <h2>{% trans "À propos de l'Agenda du libre du Québec" %}</h2>
+  <h3>{% trans "Pourquoi?" %}</h3>
+  <p>
+    {% blocktrans %}
+      Auparavant, linux-quebec.org offrait un calendrier des activités pouvant toucher aux logiciels libres mais surtout liées à Linux.  Depuis que linux-quebec.org n'existe plus, il n'y avait plus de ressource en ligne pour faire la promotion d'un évènement libre au Québec. C'est après une requête pour un flux iCal des événements Python sur la liste de <a href="http://montrealpython.org/">MontréalPython</a> que <a href="http://www.pierlux.com">Pierre-Luc Beaudoin</a> a décidé de fonder ce site.
+    {% endblocktrans %}
+  </p>
 
-<h3>Comment?</h3>
-<p>L'Agenda du libre du Québec est une copie conforme de l'<a href="http://www.agendadulibre.org">agendadulibre.org</a> (France).  Puisque ce dernier est disponible sous licence GPL, la mise en place de ce clône a été plutôt rapide. Plusieurs textes de la version québécoise proviennent de la version française. </p>
-<p> Dans les détails, la version québécoise est une réimplémentation en Django de leur version en PHP.  Ce changement technologique s'est avéré nécessaire dû au fait que la version de France n'a pas de séparation MVC, rendant difficile la création d'une version avec des textes différents. Néanmoins, le principe de fonctionnement est idéal et il a été reproduit avec minutie.</p>
-<p> Cette version est disponible sous licence <a href="http://www.fsf.org/licensing/licenses/agpl-3.0.html">GNU Affero General Public License</a>.  C'est une licence qui est plus restritive que la <a href="http://www.fsf.org/licensing/licenses/gpl-3.0.html">GNU General Public License</a> dû au fait qu'elle oblige les applications accessibles via le Web à rendre leur code source disponible. Le code source est disponible <a href="https://github.com/mlhamel/agendadulibre">ici</a>. Ce changement de licence est possible puisque L'Agenda du libre du Québec ne contient aucune ligne de code de l'original.</p>
-<p>Le logo est un mélange de l'icône <a href="http://tango.freedesktop.org">Tango</a> pour applications de calendrier et de la fleur de lys du drapeau du Québec.  Les icônes proviennent également du projet Tango.</p>
-<p>L'Agendu du libre du Québec est administré par <a href="http://www.mlhamel.org">Mathieu Leduc-Hamel</a>.</p>
-
-<h3>Historique</h3>
-<ul>
-  <li>7 août 2014
-    <ul>
-      <li>Premier hackathon de l'Agenda du libre du Québec</li>
-    </ul>
-  </li>
-  <li>21 novembre 2013
-    <ul>
-      <li>La gestion du domaine passe à FACIL</li>
-    </ul>
-  </li>
-  <li>20 avril 2010
-    <ul>
-      <li>L'Agenda du libre du Québec est dirigé par Mathieu Leduc-Hamel</li>
-    </ul>
-  </li>
-  <li>8 décembre 2009
-    <ul>
-      <li>Les liens vers Google Calendar ont été remis en place puisque les événements s'importent correctement maintenant.</li>
-    </ul>
-  </li>
-  <li>1 décembre 2009
-    <ul>
-      <li>Les liens vers Google Calendar ont été retirés tant que Google Calendar n'importera pas les données correctement.  Nous travaillerons à corriger ce bogue prochainement.</li>
-    </ul>
-  </li>
-  <li>30 novembre 2009
-    <ul>
-      <li>Lancement du site</li>
-    </ul>
-  </li>
-</ul>
+  <h3>{% trans "Comment?" %}</h3>
+  <p>
+    {% blocktrans %}
+      L'Agenda du libre du Québec est une copie conforme de l'<a href="http://www.agendadulibre.org">agendadulibre.org</a> (France).  Puisque ce dernier est disponible sous licence GPL, la mise en place de ce clône a été plutôt rapide. Plusieurs textes de la version québécoise proviennent de la version française.
+    {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans %}
+      Dans les détails, la version québécoise est une réimplémentation en Django de leur version en PHP.  Ce changement technologique s'est avéré nécessaire dû au fait que la version de France n'a pas de séparation MVC, rendant difficile la création d'une version avec des textes différents. Néanmoins, le principe de fonctionnement est idéal et il a été reproduit avec minutie.
+    {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans %}
+      Cette version est disponible sous licence <a href="http://www.fsf.org/licensing/licenses/agpl-3.0.html">GNU Affero General Public License</a>.  C'est une licence qui est plus restritive que la <a href="http://www.fsf.org/licensing/licenses/gpl-3.0.html">GNU General Public License</a> dû au fait qu'elle oblige les applications accessibles via le Web à rendre leur code source disponible. Le code source est disponible <a href="https://github.com/mlhamel/agendadulibre">ici</a>. Ce changement de licence est possible puisque L'Agenda du libre du Québec ne contient aucune ligne de code de l'original.
+    {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans %}
+      Le logo est un mélange de l'icône <a href="http://tango.freedesktop.org">Tango</a> pour applications de calendrier et de la fleur de lys du drapeau du Québec.  Les icônes proviennent également du projet Tango.
+    {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans %}
+      L'Agendu du libre du Québec est administré par <a href="http://www.mlhamel.org">Mathieu Leduc-Hamel</a>.
+    {% endblocktrans %}
+  </p>
+  <h3>{% trans "Historique" %}</h3>
+  <ul>
+    <li>{% trans "7 août 2014" %}
+      <ul>
+        <li>{% trans "Premier hackathon de l'Agenda du libre du Québec" %}</li>
+      </ul>
+    </li>
+    <li>{% trans "21 novembre 2013" %}
+      <ul>
+        <li>{% trans "La gestion du domaine passe à FACIL" %}</li>
+      </ul>
+    </li>
+    <li>{% trans "20 avril 2010" %}
+      <ul>
+        <li>{% trans "L'Agenda du libre du Québec est dirigé par Mathieu Leduc-Hamel" %}</li>
+      </ul>
+    </li>
+    <li>{% trans "8 décembre 2009" %}
+      <ul>
+        <li>{% trans "Les liens vers Google Calendar ont été remis en place puisque les événements s'importent correctement maintenant." %}</li>
+      </ul>
+    </li>
+    <li>{% trans "1 décembre 2009" %}
+      <ul>
+        <li>{% trans "Les liens vers Google Calendar ont été retirés tant que Google Calendar n'importera pas les données correctement.  Nous travaillerons à corriger ce bogue prochainement." %}</li>
+      </ul>
+    </li>
+    <li>{% trans "30 novembre 2009" %}
+      <ul>
+        <li>{% trans "Lancement du site" %}</li>
+      </ul>
+    </li>
+  </ul>
 {% endblock %}
-

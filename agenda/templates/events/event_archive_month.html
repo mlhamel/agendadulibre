@@ -1,40 +1,56 @@
 {% extends "base.html" %}
+
 {% load calendar %}
+{% load i18n %}
 
 {% block feeds %}
-{% if region %}
-<link rel="alternate" href="/event/feeds/latest_region/{{ region.id }}/" title="Agenda du libre du Québec, nouveaux évènements pour {{ region.name }}" type="application/rss+xml" />
-<link rel="alternate" href="/event/feeds/upcoming_region/{{ region.id }}/" title="Agenda du libre du Québec, prochains évènements pour {{ region.name }}" type="application/rss+xml" />
-{% endif %}
+  {% if region %}
+    <link rel="alternate" href="/event/feeds/latest_region/{{ region.id }}/"
+          title="{% blocktrans %}Agenda du libre du Québec, nouveaux évènements pour {{ region.name }} {% endblocktrans %}"
+          type="application/rss+xml" />
+    <link rel="alternate"
+          href="/event/feeds/upcoming_region/{{ region.id }}/"
+          title="Agenda du libre du Québec, prochains évènements pour {{ region.name }}"
+          type="application/rss+xml" />
+  {% endif %}
 {% endblock %}
 
 {% block actions %}
-<!--<div class="action">
-  <a href="/login/"><img src="/media/img/preferences-system-login.png" width="16px;" /></a><a href="/login/">Connexion</a>
-</div>-->
-<div class="action">
-  <a href="/event/new/"><img src="/media/img/appointment-new.png" /></a><a href="/event/new/">Proposer un événement</a>
-</div>
-<div class="action">
-  <a href="/event/feeds/"><img src="/media/img/rss.png" /></a><a href="/event/feeds/">Fils RSS et iCal</a>
-</div>
+  <div class="action">
+    <a href="/event/new/">
+      <img src="/media/img/appointment-new.png" />
+    </a>
+    <a href="/event/new/">{% trans "Proposer un événement" %}</a>
+  </div>
+  <div class="action">
+    <a href="/event/feeds/">
+      <img src="/media/img/rss.png" />
+    </a>
+    <a href="/event/feeds/">{% trans "Fils RSS et iCal" %}</a>
+  </div>
 {% endblock %}
 
 {% block content %}
-<h2 class="calendar">
-<a href="{% url 'month_view' previous_month.year previous_month.month %}?region={{ region.id }}" title="Aller au mois de {{ previous_month|date:"F Y" }}"><img id="arrow" src="/media/img/go-previous.png"></a>
-  {{ month|date:"F Y" }}
-  <a href="{% url 'month_view' next_month.year next_month.month %}?region={{ region.id }}" title="Aller au mois de {{ next_month|date:"F Y" }}"><img id="arrow" src="/media/img/go-next.png"></a>
-</h2>
-<form id="filter">
-{% for field in form %}
-{{ field.label }}
-{{ field }}
-{% endfor %}
-<noscript><input type="submit" value="Appliquer" /></noscript>
-{% if region %}
-et les évènements à portée nationale et internationale
-{% endif %}
-</form>
-{% month_cal month.year month.month region %}
+  <h2 class="calendar">
+    <a href="{% url 'month_view' previous_month.year previous_month.month %}?region={{ region.id }}"
+       title="Aller au mois de {{ previous_month|date:"F Y" }}">
+       <img id="arrow" src="/media/img/go-previous.png">
+    </a>
+    {{ month|date:"F Y" }}
+    <a href="{% url 'month_view' next_month.year next_month.month %}?region={{ region.id }}"
+       title="Aller au mois de {{ next_month|date:"F Y" }}">
+       <img id="arrow" src="/media/img/go-next.png">
+    </a>
+  </h2>
+  <form id="filter">
+    {% for field in form %}
+      {{ field.label }}
+      {{ field }}
+    {% endfor %}
+    <noscript><input type="submit" value="{% trans 'Appliquer' %}" /></noscript>
+    {% if region %}
+      {% trans "et les évènements à portée nationale et internationale" %}
+    {% endif %}
+  </form>
+  {% month_cal month.year month.month region %}
 {% endblock %}
