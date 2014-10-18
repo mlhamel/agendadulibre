@@ -153,22 +153,25 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
      self.save()
      self._disable_signals = False
 
-  @staticmethod
-  def tweet(sender, instance, **kwargs):
-    """ Tweet the event if needed it and wanted """
-    if not instance.twitter:
+  def send_tweet(self):
+    if not self.twitter:
       return
-    elif instance._disable_signals:
+    elif self._disable_signals:
       return
-    elif instance.announced:
+    elif self.announced:
       return
-    elif not instance.moderated:
+    elif not self.moderated:
       return
     else:
         tweeter = EventTweeter()
-        tweeter.tweet(instance.mention)
-        instance.announced = True
-        instance.save_without_signals()
+        tweeter.tweet(self.mention)
+        self.announced = True
+        self.save_without_signals()
+
+  @staticmethod
+  def on_tweet(sender, instance, **kwargs):
+    """ Tweet the event if needed it and wanted """
+    instance.send_tweet()
 
   @staticmethod
   def geocode(sender, instance, **kwargs):
