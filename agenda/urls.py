@@ -18,7 +18,7 @@
 #
 
 from agenda.views import AboutView, IndexView, SettingsView
-
+from django.views.generic import TemplateView
 from django.conf.urls import url, include, patterns
 from django.conf import settings
 from django.contrib import admin
@@ -29,6 +29,15 @@ admin.autodiscover()
 
 
 admin_media_path = os.path.join(os.path.dirname(admin.__file__), 'media')
+
+
+class View404(TemplateView):
+    template_name = '404.html'
+
+
+class View500(TemplateView):
+    template_name = '500.html'
+
 
 urlpatterns = patterns('',
     (r'^e/', include('agenda.events.urls')),
@@ -43,10 +52,10 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     (r'^admin_media/(.*)', 'django.views.static.serve',
-         {'document_root': admin_media_path, 'show_indexes' : True}),
+     {'document_root': admin_media_path, 'show_indexes' : True}),
 
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-         {'document_root': settings.MEDIA_ROOT}),
+     {'document_root': settings.MEDIA_ROOT}),
 )
 
 urlpatterns += patterns('', url(r'^captcha/', include('captcha.urls')))

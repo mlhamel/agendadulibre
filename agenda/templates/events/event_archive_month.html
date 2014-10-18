@@ -10,7 +10,7 @@
           type="application/rss+xml" />
     <link rel="alternate"
           href="/event/feeds/upcoming_region/{{ region.id }}/"
-          title="Agenda du libre du Québec, prochains évènements pour {{ region.name }}"
+          title="{% trans 'Agenda du libre du Québec, prochains évènements pour' %} {{ region.name }}"
           type="application/rss+xml" />
   {% endif %}
 {% endblock %}
@@ -33,12 +33,12 @@
 {% block content %}
   <h2 class="calendar">
     <a href="{% url 'month_view' previous_month.year previous_month.month %}?region={{ region.id }}"
-       title="Aller au mois de {{ previous_month|date:"F Y" }}">
+       title="{% trans 'Aller au mois de' %} {{ previous_month|date:"F Y" }}">
        <img id="arrow" src="/media/img/go-previous.png">
     </a>
     {{ month|date:"F Y" }}
     <a href="{% url 'month_view' next_month.year next_month.month %}?region={{ region.id }}"
-       title="Aller au mois de {{ next_month|date:"F Y" }}">
+       title="{% trans 'Aller au mois de' %} {{ next_month|date:"F Y" }}">
        <img id="arrow" src="/media/img/go-next.png">
     </a>
   </h2>

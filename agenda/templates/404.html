@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Erreur 404 - Page non trouvée</h2>
-<p>La page que vous avez demandé n'existe pas.  Si vous avez cliqué sur un lien dans le site, veuillez nous en informer en contactant un <a href="mailto:pierre-luc.beaudoin@novopia.com">administrateur</a>.
-
+  <h2>{% trans "Erreur 404 - Page non trouvée" %}</h2>
+  <p>
+    {% blocktrans %}
+      La page que vous avez demandé n'existe pas.  Si vous avez cliqué sur un lien dans le site, veuillez nous en informer en contactant un
+      <a href="mailto:marrakis@gmail.com">administrateur</a>.
+    {% endblocktrans %}
+  </p>
 {% endblock %}
-

@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Erreur 500 - Erreur Interne</h2>
-<p>L'erreur que vous venez de rencontrer a été rapportée.  Nous en sommes désolé et nous la corrigerons sous peu.
+<h2{% trans ">Erreur 500 - Erreur Interne" %}</h2>
+<p>{% trans "L'erreur que vous venez de rencontrer a été rapportée.  Nous en sommes désolé et nous la corrigerons sous peu." %}</p>
 
 {% endblock %}
-

@@ -4,34 +4,34 @@
 {% load humantime %}
 
 {% block title %}
-<title>{{ event.title }}</title>
+  <title>{{ event.title }}</title>
 {% endblock title %}
 
 {% block content %}
-<h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
-<b class="date">{{ event.start_time|event_time:event.end_time }}</b><br/>
-<br/>
-{% if event.latitude and event.longitude %}
-  <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-          src="http://www.openstreetmap.org/export/embed.html?bbox={{ event.bbox|join:'%2C' }}&amp;layer=mapnik&amp;marker={{ event.latitude }}%2C{{ event.longitude }}"
-          style="border: 1px solid black"></iframe><br/><small><a href="http://www.openstreetmap.org/?mlat={{ event.latitude }}&mlon={{ event.longitude }}#map=19/{{ event.latitude }}/{{ event.longitude }}">Voir une carte plus détaillée</a></small><br/>
+  <h2><a href="{{ event.url }}">{{ event.title }}</a></h2>
+  <b class="date">{{ event.start_time|event_time:event.end_time }}</b><br/>
+  <br/>
+  {% if event.latitude and event.longitude %}
+    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+            src="http://www.openstreetmap.org/export/embed.html?bbox={{ event.bbox|join:'%2C' }}&amp;layer=mapnik&amp;marker={{ event.latitude }}%2C{{ event.longitude }}"
+            style="border: 1px solid black"></iframe><br/><small><a href="http://www.openstreetmap.org/?mlat={{ event.latitude }}&mlon={{ event.longitude }}#map=19/{{ event.latitude }}/{{ event.longitude }}">{% trans "Voir une carte plus détaillée" %}</a></small><br/>
 {% endif %}
 {% if event.venue %}
-<b>{{ event.venue}}</b><br/>
+  <b>{{ event.venue}}</b><br/>
 {% endif %}
 {{ event.address}} <br/>
 {{ event.city }}, Québec<br/>
-<h3>Description</h3>
+<h3>{% trans "Description" %}</h3>
 {% autoescape off %}
 {{ event.description }}
 {% endautoescape %}
 <br/>
-<h3>Informations</h3>
-Personne ressource : <a href="mailto:{{ event.contact_email }}">{{ event.contact }}</a><br/>
-Tags: {{ event.tags }}
+<h3>{% trans "Informations" %}</h3>
+{% trans "Personne ressource" %} : <a href="mailto:{{ event.contact_email }}">{{ event.contact }}</a><br/>
+{% trans "Tags" %}: {{ event.tags }}
 <p class="not-important">
-Porté: {{ event.get_scope_display }}<br/>
-Ajouté le {{ event.submission_time }}<br/>
-Dernière mise-à-jour le {{ event.updated_time }}<br/>
+{% trans "Porté" %}: {{ event.get_scope_display }}<br/>
+{% trans "Ajouté le" %}: {{ event.submission_time }}<br/>
+{% trans "Dernière mise-à-jour le" %}: {{ event.updated_time }}<br/>
 </p>
 {% endblock %}
