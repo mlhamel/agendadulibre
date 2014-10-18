@@ -24,6 +24,8 @@ from django.db.models.signals import post_save
 
 from agenda.tagging.fields import TagField
 from agenda.lib.geocode import GoogleMapsGeocoder
+from agenda.lib.local import temp_lang
+from agenda.lib.twitter import EventTweeter
 from agenda.lib.bbox import boundingBox
 
 
@@ -119,6 +121,7 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
 
   moderator = models.ForeignKey(User, blank=True, null=True, related_name="moderated_events")
   moderated = models.BooleanField (default=False)
+  announced = models.BooleanField (default=False)
 
   submiter_email = models.EmailField (max_length=200,
       verbose_name="Votre courriel",
@@ -132,8 +135,14 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
     return self.title
 
   @property
+  def formated_date(self):
+    with temp_lang("fr"):
+      return self.start_time.strftime(u"%A prochain, le %d %B à %Hh%M")
+
+  @property
   def mention(self):
-    return "%s %s" % (self.title, self.get_absolute_url())
+    return u"%s (%s) %s" % (self.title, self.formated_date,
+                            self.get_absolute_url())
 
   @property
   def bbox(self):
@@ -143,6 +152,23 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
      self._disable_signals = True
      self.save()
      self._disable_signals = False
+
+  @staticmethod
+  def tweet(sender, instance, **kwargs):
+    """ Tweet the event if needed it and wanted """
+    if not instance.twitter:
+      return
+    elif instance._disable_signals:
+      return
+    elif instance.announced:
+      return
+    elif not instance.moderated:
+      return
+    else:
+        tweeter = EventTweeter()
+        tweeter.tweet(instance.mention)
+        instance.announced = True
+        instance.save_without_signals()
 
   @staticmethod
   def geocode(sender, instance, **kwargs):
@@ -160,3 +186,4 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
     return "/event/%i/" % self.id
 
 post_save.connect(Event.geocode, sender=Event, dispatch_uid="geocode_event")
+post_save.connect(Event.geocode, sender=Event, dispatch_uid="announce_event")

@@ -63,6 +63,13 @@ STATIC_URL = '/media/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '2oaw+105(kzy2ybr58@%1u&w_!5r6)ykg6wk9+=3+m#j*@7!n_'
 
+# twitter configuration
+TWITTER_ENABLE = False
+TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_SECRET =''
+TWITTER_OAUTH_TOKEN = ''
+TWITTER_OAUTH_TOKEN_SECRET = ''
+
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
