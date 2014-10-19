@@ -42,7 +42,6 @@ class View500(TemplateView):
 urlpatterns = patterns('',
     (r'^e/', include('agenda.events.urls')),
     (r'^event/', include('agenda.events.urls')),
-    (r'^twitter/', include('agenda.twitter.urls')),
     url(r'^$', IndexView.as_view(), name="index"),
     url(r'^about/$', AboutView.as_view(), name="about"),
     (r'^settings/$', SettingsView.as_view()),
