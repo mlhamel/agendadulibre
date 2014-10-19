@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block before_end_body %}
   <script  type="text/javascript" src="/media/tiny_mce/tiny_mce.js"></script>
   <script  type="text/javascript" src="/media/js/event_new.js"></script>
@@ -124,7 +126,7 @@
 <h3>{% trans "Informations sur l'événement" %}</h3>
 
 <p class="toggleeditor_link"><a href="javascript:toggleEditor()">
-    <span id="togglegeditor_text">{% trans "Désactiver" %}</span> {% trans"l'éditeur visuel" %}</a>
+    <span id="togglegeditor_text">{% trans "Désactiver" %}</span> {% trans "l'éditeur visuel" %}</a>
 </p>
 
 <form method="POST">
