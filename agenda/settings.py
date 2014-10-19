@@ -103,7 +103,6 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'agenda.tagging',
     'agenda.events',
-    'agenda.twitter',
     'south',
     'captcha',
 )

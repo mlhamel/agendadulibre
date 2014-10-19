@@ -20,6 +20,7 @@ setup(name='agenda',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
+          'babel',
           'djangorecipe',
           'django==1.6.5',
           'django-simple-captcha',

@@ -1,7 +1,8 @@
+# -*- encoding:utf-8 -*-
 #
-# Copyright (C) 2009 Novopia Solutions Inc.
+# Copyright (C) 2014 Mathieu Leduc-Hamel
 #
-# Author: Pierre-Luc Beaudoin <pierre-luc.beaudoin@novopia.com>
+# Author: Mathieu Leduc-Hamel <marrakis@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -17,7 +18,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.conf.urls import patterns
 
-urlpatterns = patterns('',
-)
+def truncated_string(text, max_width=100):
+    """ Return the truncated text to max_width """
+    lo = 0
+    hi = len(text)
+    if hi <= max_width:
+        return text
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if max_width < len(text[:mid]):
+            hi = mid
+        else:
+            lo = mid + 1
+    return text[:lo] + "..."

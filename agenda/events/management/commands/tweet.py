@@ -18,27 +18,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from django.core.management.base import BaseCommand, CommandError
 
-import twitter
-
-from django.conf import settings as s
+from agenda.events.models import Event
 
 
-class EventTweeter(object):
-    """
-    Object responsible at creating the link between twitter and an
-    event.
-    """
-    def __init__(self):
-        self.auth = twitter.oauth.OAuth(s.TWITTER_OAUTH_TOKEN,
-                                        s.TWITTER_OAUTH_TOKEN_SECRET,
-                                        s.TWITTER_CONSUMER_KEY,
-                                        s.TWITTER_CONSUMER_SECRET)
+class Command(BaseCommand):
+    help = 'Send the tweet corresponding to a specific event'
 
-        self.api = twitter.Twitter(auth=self.auth)
+    def add_arguments(self, parser):
+        parser.add_argument('event_id', nargs='+', type=int)
 
-    def tweet(self, message):
-        """ Send the message to twitter """
-        self.api.statuses.update(status=message)
+    def handle(self, event_id, *args, **options):
+        try:
+            event = Event.objects.get(pk=event_id)
+        except Event.DoesNotExist:
+            raise CommandError('Event "%s" does not exist' % event_id)
+        event.tweet()
+        self.stdout.write('Successfully tweet "%s"' % event_id)

@@ -17,14 +17,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+from unidecode import unidecode
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+from babel.dates import format_datetime
+
 from agenda.tagging.fields import TagField
+
+from agenda.lib.string import truncated_string
 from agenda.lib.geocode import GoogleMapsGeocoder
-from agenda.lib.local import temp_lang
 from agenda.lib.twitter import EventTweeter
 from agenda.lib.bbox import boundingBox
 
@@ -136,13 +140,19 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
 
   @property
   def formated_date(self):
-    with temp_lang("fr"):
-      return self.start_time.strftime(u"%A prochain, le %d %B à %Hh%M")
+    return format_datetime(self.start_time,
+                           format=u"d MMM yyyy à HH:MM",
+                           locale="fr_CA")
+
+  @property
+  def truncated_title(self):
+    return truncated_string(self.title, max_width=100)
 
   @property
   def mention(self):
-    return u"%s (%s) %s" % (self.title, self.formated_date,
-                            self.get_absolute_url())
+    return u"%s, le %s %s" % (self.truncated_title,
+                              self.formated_date,
+                              self.get_full_url())
 
   @property
   def bbox(self):
@@ -153,25 +163,24 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
      self.save()
      self._disable_signals = False
 
-  def send_tweet(self):
-    if not self.twitter:
+  def tweet(self):
+    tweeter = EventTweeter()
+    tweeter.tweet(self.mention)
+
+  @staticmethod
+  def on_tweet(sender, instance, **kwargs):
+    """ Tweet the event if needed it and wanted """
+    if self._disable_signals:
       return
-    elif self._disable_signals:
+    elif not self.twitter:
       return
     elif self.announced:
       return
     elif not self.moderated:
       return
-    else:
-        tweeter = EventTweeter()
-        tweeter.tweet(self.mention)
-        self.announced = True
-        self.save_without_signals()
-
-  @staticmethod
-  def on_tweet(sender, instance, **kwargs):
-    """ Tweet the event if needed it and wanted """
-    instance.send_tweet()
+    instance.tweet()
+    instance.announced = True
+    instance.save_without_signals()
 
   @staticmethod
   def geocode(sender, instance, **kwargs):
@@ -184,6 +193,9 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       instance.latitude = results.get("latitude")
       instance.longitude = results.get("longitude")
       instance.save_without_signals()
+
+  def get_full_url(self):
+    return "http://agendadulibre.qc.ca%s" % self.get_absolute_url()
 
   def get_absolute_url (self):
     return "/event/%i/" % self.id
