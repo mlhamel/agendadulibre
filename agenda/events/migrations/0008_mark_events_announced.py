@@ -9,10 +9,7 @@ class Migration(DataMigration):
     def forwards(self, orm):
         for event in orm.Event.objects.all():
             event.announced = True
-        "Write your forwards methods here."
-        # Note: Don't use "from appname.models import ModelName".
-        # Use orm.ModelName to refer to models in this application,
-        # and orm['appname.ModelName'] for models in other applications.
+            event.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
