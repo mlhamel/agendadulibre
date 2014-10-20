@@ -170,13 +170,13 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
   @staticmethod
   def on_tweet(sender, instance, **kwargs):
     """ Tweet the event if needed it and wanted """
-    if self._disable_signals:
+    if instance._disable_signals:
       return
-    elif not self.twitter:
+    elif not instance.twitter:
       return
-    elif self.announced:
+    elif instance.announced:
       return
-    elif not self.moderated:
+    elif not instance.moderated:
       return
     instance.tweet()
     instance.announced = True
@@ -201,4 +201,4 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
     return "/event/%i/" % self.id
 
 post_save.connect(Event.geocode, sender=Event, dispatch_uid="geocode_event")
-post_save.connect(Event.geocode, sender=Event, dispatch_uid="announce_event")
+post_save.connect(Event.on_tweet, sender=Event, dispatch_uid="announce_event")
