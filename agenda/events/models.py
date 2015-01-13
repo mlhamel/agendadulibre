@@ -17,8 +17,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-from unidecode import unidecode
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -26,6 +24,8 @@ from django.db.models.signals import post_save
 from babel.dates import format_datetime
 
 from agenda.tagging.fields import TagField
+
+from agenda.events.utils import mail_submitter
 
 from agenda.lib.string import truncated_string
 from agenda.lib.geocode import GoogleMapsGeocoder
@@ -168,17 +168,17 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
     tweeter.tweet(self.mention)
 
   @staticmethod
-  def on_tweet(sender, instance, **kwargs):
+  def announce(sender, instance, **kwargs):
     """ Tweet the event if needed it and wanted """
     if instance._disable_signals:
-      return
-    elif not instance.twitter:
       return
     elif instance.announced:
       return
     elif not instance.moderated:
       return
-    instance.tweet()
+    if instance.twitter:
+      instance.tweet()
+    mail_submitter(instance)
     instance.announced = True
     instance.save_without_signals()
 
@@ -201,4 +201,4 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
     return "/event/%i/" % self.id
 
 post_save.connect(Event.geocode, sender=Event, dispatch_uid="geocode_event")
-post_save.connect(Event.on_tweet, sender=Event, dispatch_uid="announce_event")
+post_save.connect(Event.announce, sender=Event, dispatch_uid="announce_event")

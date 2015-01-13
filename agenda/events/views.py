@@ -26,7 +26,6 @@ from agenda.events.models import Region, Event
 from agenda.events.feeds import UpcomingEventCalendarByRegion
 from agenda.events.utils import mail_moderators
 from django.db.models import Count
-from django.core.mail import mail_admins
 from django.conf import settings
 
 

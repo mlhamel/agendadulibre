@@ -40,8 +40,8 @@ class ThanksView(TemplateView):
 
 
 general_info = {
-    "queryset" : Event.objects.filter(moderated=True),
-    "template_object_name" : "event",
+    "queryset": Event.objects.filter(moderated=True),
+    "template_object_name": "event",
 }
 
 list_info = {
@@ -59,7 +59,8 @@ feeds = {
 }
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', EventList.as_view()),
     url(r'^new/$', 'agenda.events.views.propose', name="propose"),
     url(r'^new/thanks/$', ThanksView.as_view()),
@@ -73,9 +74,11 @@ urlpatterns = patterns('',
     (r'^feeds/latest/$', LatestEntries()),
     (r'^feeds/upcoming/$', UpcomingEntries()),
     (r'^feeds/latest_region/(?P<region_id>\d+)/$', LatestEntriesByRegion()),
-    (r'^feeds/upcoming_region/(?P<region_id>\d+)/$', UpcomingEntriesByRegion()),
+    (r'^feeds/upcoming_region/(?P<region_id>\d+)/$',
+     UpcomingEntriesByRegion()),
 
     (r'^calendar/$', UpcomingEventCalendar()),
-    (r'^calendar_region/(?P<region_id>\d+)/$', 'agenda.events.views.calendar_region'),
+    (r'^calendar_region/(?P<region_id>\d+)/$',
+     'agenda.events.views.calendar_region'),
 
 )

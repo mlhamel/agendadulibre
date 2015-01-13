@@ -34,6 +34,7 @@ import vobject
 import re
 import locale
 
+
 def remove_html_tags(data):
     p = re.compile(r'<.*?>')
     return p.sub('', data)
@@ -50,6 +51,7 @@ EVENT_ITEMS = (
     ('created', 'created'),
 )
 
+
 class ICalendarFeed(object):
 
     def __call__(self, *args, **kwargs):
@@ -59,8 +61,8 @@ class ICalendarFeed(object):
         cal.add('X-WR-CALNAME').value = getattr(self, "name")()
         cal.add('X-WR-CALDESC').value = getattr(self, "description")()
         cal.add('X-WR-TIMEZONE').value = getattr(self, "timezone")()
-        cal.add('CALSCALE').value = "GREGORIAN";
-        cal.add('METHOD').value = "PUBLISH";
+        cal.add('CALSCALE').value = "GREGORIAN"
+        cal.add('METHOD').value = "PUBLISH"
 
         for item in self.items():
 
@@ -78,13 +80,13 @@ class ICalendarFeed(object):
         response['Content-Type'] = 'application/octet-stream; charset=utf-8'
         return response
 
-    def name (self):
+    def name(self):
         return ""
 
-    def description (self):
+    def description(self):
         return ""
 
-    def timezone (self):
+    def timezone(self):
         return ""
 
     def items(self):
@@ -129,9 +131,12 @@ class UpcomingEventCalendar(ICalendarFeed):
         return u"America/Montreal"
 
     def items(self):
-        start = date.today() - timedelta (days=30)
-        end = date.today() + timedelta (days=60)
-        return Event.objects.filter(moderated=True,start_time__gte=start,start_time__lte=end)
+        start = date.today() - timedelta(days=30)
+        end = date.today() + timedelta(days=60)
+        return (Event.objects
+                .filter(moderated=True)
+                .filter(start_time__gte=start)
+                .filter(start_time__lte=end))
 
     def item_uid(self, item):
         return str(item.id) + "@agendadulibre.qc.ca"
@@ -146,7 +151,7 @@ class UpcomingEventCalendar(ICalendarFeed):
         return item.address + ", " + item.city.name + u", Québec"
 
     def item_description(self, item):
-        return remove_html_tags (item.description)
+        return remove_html_tags(item.description)
 
     def item_url(self, item):
         return item.url
@@ -161,21 +166,26 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
         return u"L'Agenda du libre du Québec (" + self.region.name + ")"
 
     def description(self):
-        return u"Tous les événements du libre du Québec pour la région " + self.region.name
+        return (u"Tous les événements du libre du Québec pour la région "
+                + self.region.name)
 
     def timezone(self):
         return u"America/Montreal"
 
     def items(self):
-        start = date.today() - timedelta (days=30)
-        end = date.today() + timedelta (days=60)
+        start = date.today() - timedelta(days=30)
+        end = date.today() + timedelta(days=60)
 
-        if self.region != None:
-          q = Q(city__region=self.region,scope="L") | Q(scope="I") | Q(scope="N")
+        if self.region is not None:
+            q = (Q(city__region=self.region, scope="L")
+                 | Q(scope="I") | Q(scope="N"))
         else:
-          q = Q()
+            q = Q()
 
-        return Event.objects.filter(q).filter(moderated=True,start_time__gte=start,start_time__lte=end)
+        return (Event.objects
+                .filter(q)
+                .filter(moderated=True)
+                .filter(start_time__gte=start, start_time__lte=end))
 
     def item_uid(self, item):
         return str(item.id) + "@agendadulibre.qc.ca"
@@ -187,10 +197,11 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
         return item.end_time
 
     def item_location(self, item):
-        return item.address + ", " + item.city.name + ", " + item.city.region.name
+        return (item.address + ", " + item.city.name + ", "
+                + item.city.region.name)
 
     def item_description(self, item):
-        return remove_html_tags (item.description)
+        return remove_html_tags(item.description)
 
     def item_url(self, item):
         return item.url
@@ -202,30 +213,39 @@ class LatestEntries(Feed):
     description = "Flux à jour des derniers évènements ajoutés"
 
     def items(self):
-        return Event.objects.filter(moderated=True).order_by('-submission_time')[:10]
+        return (Event.objects
+                .filter(moderated=True)
+                .order_by('-submission_time')[:10])
 
     def item_pubdate(self, item):
         return item.start_time
+
 
 class LatestEntriesByRegion(LatestEntries):
     link = "/event/"
 
     def items_title(self, obj):
-        return u"Agendadulibre.qc.ca: Nouveaux évènements pour %s (Québec)" % obj.name
+        return (u"Agendadulibre.qc.ca: Nouveaux évènements pour %s (Québec)"
+                % obj.name)
 
     def items_description(self, obj):
-        return u"Évènements relatif aux logiciels libre récemment ajouté pour %s (Québec) et à plus grande portée" % obj.name
+        return (u"Évènements relatif aux logiciels libre récemment ajouté pour"
+                " %s (Québec) et à plus grande portée"
+                % obj.name)
 
     def get_object(self, request, region_id):
         return get_object_or_404(Region, pk=region_id)
 
     def items(self, region, tag=None):
-        if region != None:
-          q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
+        if region is not None:
+            q = Q(city__region=region, scope="L") | Q(scope="I") | Q(scope="N")
         else:
-          q = Q()
+            q = Q()
 
-        return Event.objects.filter(q).filter(moderated=True).order_by('-submission_time')[:10]
+        return (Event.objects
+                .filter(q)
+                .filter(moderated=True)
+                .order_by('-submission_time')[:10])
 
 
 class UpcomingEntries(LatestEntries):
@@ -234,26 +254,33 @@ class UpcomingEntries(LatestEntries):
     description = "Flux à jour des évènements à venir"
 
     def items(self):
-        today = date.today ()
-        return Event.objects.filter(moderated=True,start_time__gte=today).order_by('start_time')[:10]
+        today = date.today()
+        return (Event.objects
+                .filter(moderated=True)
+                .filter(start_time__gte=today)
+                .order_by('start_time')[:10])
+
 
 class UpcomingEntriesByRegion(UpcomingEntries):
     link = "/event/"
 
     def title(self, obj):
-        return u"Agendadulibre.qc.ca: Évènements à venir pour %s (Québec)" % obj.name
+        return (u"Agendadulibre.qc.ca: Évènements à venir pour %s (Québec)"
+                % obj.name)
 
     def description(self, obj):
-        return u"Évènements relatif aux logiciels libre à venir pour %s (Québec) et à plus grande portée" % obj.name
+        return (u"Évènements relatif aux logiciels libre à venir pour %s (Québec) et à plus grande portée"  # noqa
+                % obj.name)
 
     def get_object(self, request, region_id):
         return get_object_or_404(Region, pk=region_id)
 
     def items(self, region):
-        if region != None:
-          print region
-          q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
+        if region is not None:
+            q = Q(city__region=region, scope="L") | Q(scope="I") | Q(scope="N")
         else:
-          q = Q()
-
-        return Event.objects.filter(q).filter(moderated=True).order_by('-start_time')[:10]
+            q = Q()
+        return (Event.objects
+                .filter(q)
+                .filter(moderated=True)
+                .order_by('-start_time')[:10])
