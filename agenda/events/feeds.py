@@ -236,7 +236,7 @@ class LatestEntriesByRegion(LatestEntries):
     def get_object(self, request, region_id):
         return get_object_or_404(Region, pk=region_id)
 
-    def items(self, region=None, tag=None):
+    def items(self, region):
         if region is not None:
             q = Q(city__region=region, scope="L") | Q(scope="I") | Q(scope="N")
         else:
@@ -275,7 +275,7 @@ class UpcomingEntriesByRegion(UpcomingEntries):
     def get_object(self, request, region_id):
         return get_object_or_404(Region, pk=region_id)
 
-    def items(self, region):
+    def items(self, region=None):
         if region is not None:
             q = Q(city__region=region, scope="L") | Q(scope="I") | Q(scope="N")
         else:
