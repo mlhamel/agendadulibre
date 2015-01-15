@@ -21,8 +21,9 @@ from datetime import date
 
 
 class IndexView(RedirectView):
-    today = date.today()
-    url = "/event/%d/%d/" % (today.year, today.month)
+    def get_redirect_url(self, *args, **kwargs):
+        today = date.today()
+        return "/event/%d/%d/" % (today.year, today.month)
 
 
 class AboutView(TemplateView):
