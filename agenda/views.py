@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+from django.utils.cache import add_never_cache_headers
 from django.views.generic import TemplateView, RedirectView
 from datetime import date
 
@@ -26,6 +27,11 @@ class IndexView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         today = date.today()
         return "/event/%d/%d/" % (today.year, today.month)
+
+    def options(self, *args, **kwargs):
+        response = super(IndexView, self).options(*args, **kwargs)
+        add_never_cache_headers(response)
+        return response
 
 
 class AboutView(TemplateView):
