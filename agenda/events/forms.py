@@ -46,9 +46,9 @@ class EventForm(forms.ModelForm):
 
     class Meta:
       model = Event
-      exclude = ('submission_time', 'updated_time', 'decision_time',
-                 'moderator', 'moderated', 'latitude', 'longitude',
-                 'banner', 'spotlight')
+      exclude = ("submission_time", "updated_time", "decision_time",
+                 "moderator", "moderated", "latitude", "longitude",
+                 "banner", "spotlight", "announced", "twitter")
 
     def clean(self):
       cleaned_data = self.cleaned_data
@@ -76,4 +76,4 @@ class EventForm(forms.ModelForm):
 
 class RegionFilterForm (forms.Form):
     region = forms.ModelChoiceField(Region.objects.all(), empty_label="Toutes les régions", required=False, label="Région",
-        widget=forms.Select(attrs={'onchange':'document.getElementById("filter").submit();'}))
+        widget=forms.Select(attrs={"onchange":"document.getElementById('filter').submit();"}))
