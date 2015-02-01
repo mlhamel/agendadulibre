@@ -9,125 +9,21 @@
 
 {% block content %}
   <h2>{% trans "Proposer un événement" %}</h2>
-  <p>{% trans "Cette page permet de soumettre un événement dans l'Agenda du libre du Québec. Celui-ci n'apparaîtra pas automatiquement dans l'Agenda, il sera tout d'abord validé par un modérateur." %}</p>
-  <div id="advises">
-  <h3>{% trans "Recommandations importantes" %}</h3>
   <p>
     {% blocktrans %}
-      Ces quelques recommandations vous permettront de proposer un
-      événement qui sera validé plus rapidement, et dont la
-      lisibilité sera meilleure pour les utilisateurs de l'Agenda du
-      libre du Québec.
+      Cette page permet de soumettre un événement dans l'Agenda du libre du Québec.
+      Celui-ci n'apparaîtra pas automatiquement dans l'Agenda,
+      il sera tout d'abord validé par un modérateur.
+    {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans %}
+      Pour plus d'informations et quelques conseils pour avoir une publication de meilleurs
+      qualité, veuillez consulter la de <a href="/event/help">conseils</a>.
     {% endblocktrans %}
   </p>
 
-  <ul>
-    <li>
-      {% blocktrans %}
-        L'événement doit concerner l'<b>informatique
-        libre</b> ce qui implique tout projet sous <a href="http://www.opensource.org/licenses/alphabetical">licence
-        approuvée</a> par l'<a href="http://www.opensource.org/">Open Source Initiative</a> et
-        les projets <a href="http://creativecommons.org">Creative Commons</a>. L'agenda n'a pas vocation
-        à publier d'autres types d'événements.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        Le texte des événements doit être rédigé en
-        français, en <b>évitant les fautes de
-        grammaire et d'orthographe</b>.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        Donnez une description <b>rédigée</b> de l'événement, avec des
-        phrases, plutôt qu'un style télégraphique.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        Commencez la description de votre événement par une phrase
-        reprenant les informations principales, telle que&nbsp;: <i>«
-        L'association des Gens-Branchés organise une conférence sur le thème des <b>modèles économiques du
-        logiciel libre</b> le samedi 21 mars de 18h à 20h à la Bibliothèque Gabrielle-Roy
-        de Québec. »</i>
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        Pensez que le lecteur peut ne pas connaître votre association,
-        le logiciel dont il sera question, etc., donc donnez à chaque fois
-        toutes les informations nécessaires. Rappelez <b>le principe de
-        l'événement, le public visé, le lieu exact, la date,
-        l'heure</b>, même si il est régulier (repas, rencontre
-        régulière, etc.) et que vous avez déjà soumis un
-        événement du même type dans l'Agenda.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        <b>Égayez au maximum la description</b> de votre événement:
-        lien vers le site de votre association, vers le logiciel ou le
-        langage dont il sera question, vers les organismes partenaires,
-        etc. Pour cela, utilisez les balises HTML pour mettre en gras, en
-        italique, faire des paragraphes et des liens.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        Ne mettez pas l'intégralité des mots en majuscule, que ce
-        soit dans le titre, le nom de la ville ou la description.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        Donnez l'<b>adresse directe</b> d'un site Web donnant plus
-        d'informations sur l'événement. Si l'adresse est la page
-        d'accueil du site de votre organisation, veillez à ce que
-        l'événement soit clairement visible, et que le lecteur n'ait
-        pas à chercher trop longtemps avant de trouver l'information qu'il
-        cherche.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        La description de l'événement ne doit pas ressembler à une
-        publicité éhontée pour votre entreprise, projet ou logiciel. Le ton
-        d'un communiqué de presse, par exemple, ne convient pas pour l'Agenda
-        du libre du Québec.
-      {% endblocktrans %}
-    </li>
-
-    <li>
-      {% blocktrans %}
-        Les événements de type professionnel sont acceptés dès lors
-        qu'ils sont accessibles et ouverts à tous. Les événements payants
-        sont acceptés si le prix de l'entrée ne réserve pas l'événement à un
-        public uniquement professionnel.
-      {% endblocktrans %}
-    </li>
-  </ul>
-  <p>
-    {% blocktrans %}
-      L'équipe de modération se réserve le droit de modifier la
-      description de l'événement pour la rendre plus complète, plus
-      lisible ou plus attrayante.
-    {% endblocktrans %}
-  </p>
-</div>
 <h3>{% trans "Informations sur l'événement" %}</h3>
-
-<p class="toggleeditor_link"><a href="javascript:toggleEditor()">
-    <span id="togglegeditor_text">{% trans "Désactiver" %}</span> {% trans "l'éditeur visuel" %}</a>
-</p>
 
 <form method="POST">
   <table class="form">
