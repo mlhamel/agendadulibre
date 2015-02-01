@@ -67,7 +67,8 @@ div.header img.logo {
 
 div.header div.actions {
   float: right;
-  padding: 10px 61px 10px 10px;
+  padding: 10px 10px 10px 10px;
+  margin-right: 92px;
   margin-top: 10px;
 }
 
@@ -106,7 +107,7 @@ h2 {
 
 h2.calendar {
   text-align: center;
-  padding-left: 265px;
+  padding-left: 333px;
 }
 
 a {
