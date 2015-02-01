@@ -35,15 +35,12 @@ div.header {
   -moz-border-radius: 20px 20px 0 0;
   -webkit-border-top-left-radius: 20px;
   -webkit-border-top-right-radius: 20px;
-  max-width: 1200px;
   margin: auto;
-  margin-top: 35px;
 }
 
 div.main {
   padding: 10px;
   background: white;
-  max-width: 1200px;
   margin: auto;
 }
 
@@ -55,7 +52,6 @@ div.footer {
   -moz-border-radius: 0 0 20px 20px;
   -webkit-border-bottom-left-radius: 20px;
   -webkit-border-bottom-right-radius: 20px;
-  max-width: 1200px;
   margin: auto;
 }
 
@@ -68,7 +64,7 @@ div.header img.logo {
 div.header div.actions {
   float: right;
   padding: 10px 10px 10px 10px;
-  margin-right: 92px;
+  margin-right: 125px;
   margin-top: 10px;
 }
 
@@ -107,7 +103,7 @@ h2 {
 
 h2.calendar {
   text-align: center;
-  padding-left: 333px;
+  padding-left: 363px;
 }
 
 a {
