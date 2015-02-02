@@ -9,7 +9,7 @@ class Migration(DataMigration):
     def forwards(self, orm):
         for event in orm.Event.objects.all():
             event.announced = True
-            event.save_without_signals()
+
 
     def backwards(self, orm):
         "Write your backwards methods here."
