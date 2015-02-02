@@ -40,14 +40,7 @@
           </a>
           <a href="/event/new/">{% trans "Proposer un événement" %}</a>
         </div>
-        {% if not user.is_authenticated %}
-          <div class="action">
-            <a href="/login/">
-              <img width="16" src="/media/img/login.png" />
-            </a>
-            <a href="/login/">{% trans "Connexion" %}</a>
-          </div>
-        {% else %}
+        {% if user.is_authenticated %}
           <div class="action">
             <a href="/logout">
               <img width="16" src="/media/img/login.png" />
