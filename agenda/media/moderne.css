@@ -29,7 +29,7 @@ body {
 }
 
 div.header {
-  padding: 10px;
+  padding: 10px 10px 30px 10px;
   background: url('/media/img/bg.png') repeat-x white;
   height: 75px;
   -moz-border-radius: 20px 20px 0 0;
@@ -103,7 +103,6 @@ h2 {
 
 h2.calendar {
   text-align: center;
-  padding-left: 44px;
 }
 
 a {
