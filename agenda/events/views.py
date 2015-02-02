@@ -40,7 +40,6 @@ from django.conf import settings
 
 def propose(request, template_name="events/event_new.html"):
     form = EventForm(request)
-    import pdb;pdb.set_trace()
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
