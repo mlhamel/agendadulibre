@@ -34,6 +34,33 @@
       <a href="/"><img class="logo" src="/media/img/logo.png"/></a>
       <div class="actions">
         {% block actions %}
+        <div class="action">
+          <a href="/event/new/">
+            <img src="/media/img/appointment-new.png" />
+          </a>
+          <a href="/event/new/">{% trans "Proposer un événement" %}</a>
+        </div>
+        {% if not user.is_authenticated %}
+          <div class="action">
+            <a href="/login/">
+              <img width="16" src="/media/img/login.png" />
+            </a>
+            <a href="/login/">{% trans "Connexion" %}</a>
+          </div>
+        {% else %}
+          <div class="action">
+            <a href="/logout">
+              <img width="16" src="/media/img/login.png" />
+            </a>
+            <a href="/logout/">{% trans "Déconnexion" %}</a>
+          </div>
+        {% endif %}
+        <div class="action">
+          <a href="/event/feeds/">
+            <img src="/media/img/rss.png" />
+          </a>
+          <a href="/event/feeds/">{% trans "Fils RSS et iCal" %}</a>
+        </div>
         {% endblock %}
         <div class="language-selector action" style="margin-top: 4px; margin-left: 20px;">
           <form action="/i18n/setlang/" method="post">{% csrf_token %}

@@ -36,7 +36,7 @@ class EventDetail(DetailView):
 
 
 class ThanksView(TemplateView):
-    template_name = 'events/event_thanks.html'
+    template_name = "events/event_thanks.html"
 
 
 general_info = {
@@ -52,34 +52,40 @@ event_info = general_info
 event_list_info = dict(general_info, **list_info)
 
 feeds = {
-    'latest': LatestEntries(),
-    'upcoming': UpcomingEntries(),
-    'latest_region': LatestEntriesByRegion(),
-    'upcoming_region': UpcomingEntriesByRegion(),
+    "latest": LatestEntries(),
+    "upcoming": UpcomingEntries(),
+    "latest_region": LatestEntriesByRegion(),
+    "upcoming_region": UpcomingEntriesByRegion(),
 }
 
 
 urlpatterns = patterns(
-    '',
-    url(r'^$', EventList.as_view()),
-    url(r'^new/$', 'agenda.events.views.propose', name="propose"),
-    url(r'^help/$', 'agenda.events.views.help', name="event_help"),
-    url(r'^new/thanks/$', ThanksView.as_view()),
-    url(r'^(?P<pk>\d+)/$', EventDetail.as_view()),
-    url(r'^(?P<year>\d+)/(?P<month>\d+)/$', 'agenda.events.views.month',
+    "",
+    url(r"^$", EventList.as_view()),
+    url(r"^new/$", "agenda.events.views.propose", name="propose"),
+    url(r"^help/$", "agenda.events.views.help", name="help"),
+    url(r"^new/thanks/$", ThanksView.as_view()),
+    url(r"^(?P<pk>\d+)/$", EventDetail.as_view()),
+
+    url(r"^(?P<event_id>\d+)/moderate$", "agenda.events.views.moderate",
+        name="moderate"),
+    url(r"^(?P<event_id>\d+)/unmoderate$", "agenda.events.views.unmoderate",
+        name="unmoderate"),
+
+    url(r"^(?P<year>\d+)/(?P<month>\d+)/$", "agenda.events.views.month",
         name="month_view"),
 
-    url(r'^stats/$', 'agenda.events.views.stats', name='stats'),
+    url(r"^stats/$", "agenda.events.views.stats", name="stats"),
 
-    url(r'^feeds/$', 'agenda.events.views.feed_list', name="feed_list"),
-    (r'^feeds/latest/$', LatestEntries()),
-    (r'^feeds/upcoming/$', UpcomingEntries()),
-    (r'^feeds/latest_region/(?P<region_id>\d+)/$', LatestEntriesByRegion()),
-    (r'^feeds/upcoming_region/(?P<region_id>\d+)/$',
+    url(r"^feeds/$", "agenda.events.views.feed_list", name="feed_list"),
+    (r"^feeds/latest/$", LatestEntries()),
+    (r"^feeds/upcoming/$", UpcomingEntries()),
+    (r"^feeds/latest_region/(?P<region_id>\d+)/$", LatestEntriesByRegion()),
+    (r"^feeds/upcoming_region/(?P<region_id>\d+)/$",
      UpcomingEntriesByRegion()),
 
-    (r'^calendar/$', UpcomingEventCalendar()),
-    (r'^calendar_region/(?P<region_id>\d+)/$',
-     'agenda.events.views.calendar_region'),
+    (r"^calendar/$", UpcomingEventCalendar()),
+    (r"^calendar_region/(?P<region_id>\d+)/$",
+     "agenda.events.views.calendar_region"),
 
 )

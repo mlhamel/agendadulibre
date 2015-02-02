@@ -76,6 +76,16 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.eggs.Loader'
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -115,3 +125,5 @@ MAX_TAG_LENGTH = 255
 
 FROM_EMAIL = "info@agendadulibre.qc.ca"
 ENABLE_MAIL = False
+
+LOGIN_URL = "/login"

@@ -15,21 +15,6 @@
   {% endif %}
 {% endblock %}
 
-{% block actions %}
-  <div class="action">
-    <a href="/event/new/">
-      <img src="/media/img/appointment-new.png" />
-    </a>
-    <a href="/event/new/">{% trans "Proposer un événement" %}</a>
-  </div>
-  <div class="action">
-    <a href="/event/feeds/">
-      <img src="/media/img/rss.png" />
-    </a>
-    <a href="/event/feeds/">{% trans "Fils RSS et iCal" %}</a>
-  </div>
-{% endblock %}
-
 {% block content %}
   <h2 class="calendar">
     <a href="{% url 'month_view' previous_month.year previous_month.month %}?region={{ region.id }}"

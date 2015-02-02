@@ -46,7 +46,9 @@ urlpatterns = patterns('',
     url(r'^about/$', AboutView.as_view(), name="about"),
     (r'^settings/$', SettingsView.as_view()),
     (r'^i18n/', include('django.conf.urls.i18n')),
+
     (r'^login/$', 'django.contrib.auth.views.login'),
+    (r'^logout/$', 'django.contrib.auth.views.logout'),
 
     (r'^admin/', include(admin.site.urls)),
 

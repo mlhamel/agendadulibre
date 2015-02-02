@@ -19,35 +19,42 @@
 #
 
 from datetime import date, timedelta
-from django.shortcuts import render_to_response, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
+from django.template.response import TemplateResponse
+from django.template.loader import render_to_string
+
 from django.http import HttpResponseNotFound
+
 from agenda.events.forms import EventForm, RegionFilterForm
 from agenda.events.models import Region, Event
 from agenda.events.feeds import UpcomingEventCalendarByRegion
 from agenda.events.utils import mail_moderators
+
+from django.contrib.auth.decorators import login_required
+
 from django.db.models import Count
 from django.conf import settings
 
 
-def propose(request):
+def propose(request, template_name="events/event_new.html"):
     form = EventForm(request)
-
+    import pdb;pdb.set_trace()
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
             e = form.save()
             if settings.ENABLE_MAIL:
-                msg = (u"Bonjour, \n\nLe nouvel évènement '" + e.title
-                       + u"' a été soumis.  Pour le réviser, veuillez visiter\n")
-                msg += u"http://www.agendadulibre.qc.ca/admin/events/event/%d/" % e.id
-                msg += u"\n\nMerci,\n\nL'Agenda du libre du Québec"
+                msg = render_to_string("events/mail.html", {
+                    "event": e
+                })
                 mail_moderators(u"Nouvel évènement en attente de modération",
                                 msg)
             return HttpResponseRedirect("/event/new/thanks/")
     else:
         form = EventForm()
-
-    return render_to_response("events/event_new.html", {
+    return TemplateResponse(request, template_name, {
         "form": form,
     })
 
@@ -90,8 +97,32 @@ def feed_list(request):
     })
 
 
-def help(request):
-    return render_to_response("events/help.html")
+def help(request, template_name="events/help.html"):
+    return TemplateResponse(request, template_name)
+
+
+#login_required
+def moderate(request, event_id):
+    try:
+        event = Event.objects.get(pk=event_id)
+    except Region.DoesNotExist:
+        return HttpResponseNotFound()
+    event.moderated = True
+    event.moderator = request.user
+    event.save()
+    return HttpResponseRedirect(reverse("index"))
+
+
+#login_required
+def unmoderate(request, event_id):
+    try:
+        event = Event.objects.get(pk=event_id)
+    except Region.DoesNotExist:
+        return HttpResponseNotFound()
+    event.moderated = False
+    event.moderator = request.user
+    event.save()
+    return HttpResponseRedirect(reverse("index"))
 
 
 def calendar_region(request, region_id):
@@ -103,7 +134,8 @@ def calendar_region(request, region_id):
     return callable(request)
 
 
-def month(request, year, month):
+def month(request, year, month,
+          template_name="events/event_archive_month.html"):
     month = date(int(year), int(month), 1)
     previous = month - timedelta(days=15)
     next = month + timedelta(days=45)
@@ -118,7 +150,7 @@ def month(request, year, month):
     else:
         form = RegionFilterForm()
 
-    return render_to_response("events/event_archive_month.html", {
+    return TemplateResponse(request, template_name, {
         "month": month,
         "previous_month": previous,
         "next_month": next,

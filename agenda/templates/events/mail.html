@@ -1,0 +1,15 @@
+Bonjour,
+
+nLe nouvel évènement {{ event.title }}
+a été soumis.  Pour le réviser, veuillez visiter
+
+{{ event.get_full_admin_url }}
+
+Pour le modérer positivement veuillez cliquer sur le lien
+suivant:
+
+{% url 'unmoderate' event.id %}
+
+Merci,
+
+L'Agenda du libre du Québec

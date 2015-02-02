@@ -172,6 +172,9 @@ Veillez à utiliser les balises &lt;p&gt; pour formater les paragraphes, et non 
       instance.longitude = results.get("longitude")
       instance.save_without_signals()
 
+  def get_full_admin_url(self):
+    return "http://www.agendadulibre.qc.ca/admin/events/event/%d/" % self.id
+
   def get_full_url(self):
     return "http://agendadulibre.qc.ca%s" % self.get_absolute_url()
 
