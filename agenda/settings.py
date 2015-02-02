@@ -127,3 +127,6 @@ FROM_EMAIL = "info@agendadulibre.qc.ca"
 ENABLE_MAIL = False
 
 LOGIN_URL = "/login"
+
+RECAPTCHA_PUBLIC_KEY = ""
+RECAPTCHA_PRIVATE_KEY = ""

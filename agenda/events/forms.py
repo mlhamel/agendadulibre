@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from captcha.fields import CaptchaField
+from captcha.fields import ReCaptchaField
 
 from django import forms
 from agenda.events.models import Event, City, Region
@@ -42,7 +42,7 @@ class EventForm(forms.ModelForm):
 
     city = forms.ModelChoiceField(City.objects.all(), empty_label=None, label="Ville")
 
-    captcha = CaptchaField()
+    captcha = ReCaptchaField()
 
     class Meta:
       model = Event
