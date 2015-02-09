@@ -42,7 +42,7 @@ class EventForm(forms.ModelForm):
 
     city = forms.ModelChoiceField(City.objects.all(), empty_label=None, label="Ville")
 
-    captcha = ReCaptchaField()
+    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
 
     class Meta:
       model = Event
