@@ -19,7 +19,7 @@
 #
 
 from datetime import date, timedelta
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import render_to_response, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from django.template.response import TemplateResponse
