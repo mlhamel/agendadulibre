@@ -17,6 +17,7 @@ push: docker-push
 docker-build: do-docker-build
 docker-commit: do-docker-commit
 docker-push: do-docker-push
+docker-tag: do-docker-tag
 
 do-docker-build:
 	docker build -t agendadulibre --no-cache --rm . | tee build.log || exit 1
@@ -26,6 +27,9 @@ do-docker-commit:
 
 do-docker-push:
 	docker push $(repos)
+
+do-docker-tag:
+	docker tag -f agendadulibre:$(tag) $(repos):$(tag)
 
 # Version Bump using bumpversion
 patch:
