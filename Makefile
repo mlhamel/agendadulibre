@@ -14,6 +14,7 @@ default: build
 build: docker-build
 commit: docker-commit
 push: docker-push
+tag: docker-tag
 docker-build: do-docker-build
 docker-commit: do-docker-commit
 docker-push: do-docker-push
