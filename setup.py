@@ -21,7 +21,6 @@ setup(name='agenda',
       zip_safe=False,
       install_requires=[
           'babel',
-          'djangorecipe',
           'django==1.6.5',
           'django-recaptcha',
           'reindent',
@@ -31,7 +30,8 @@ setup(name='agenda',
           'twitter',
           'unidecode',
           'vobject',
-          'werkzeug',],
+          'werkzeug'
+      ],
       entry_points={
           'django.apps': [
               'agenda = agenda'

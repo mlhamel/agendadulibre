@@ -21,3 +21,4 @@ production.py
 development.py
 local.py
 agenda/media/banners/
+build.log
