@@ -14,4 +14,4 @@ RUN         cd /home/agendadulibre && python setup.py develop
 EXPOSE      8000
 
 WORKDIR     /home/agendadulibre
-CMD         DJANGO_SETTINGS_MODULE=agenda.production django-admin runserver 0.0.0.0:8000
+CMD         DJANGO_SETTINGS_MODULE=agenda.settings django-admin.py runserver 0.0.0.0:8000
