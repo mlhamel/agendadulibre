@@ -31,9 +31,6 @@
       {{ field }}
     {% endfor %}
     <noscript><input type="submit" value="{% trans 'Appliquer' %}" /></noscript>
-    {% if region %}
-      {% trans "et les évènements à portée nationale et internationale" %}
-    {% endif %}
   </form>
   {% month_cal month.year month.month region %}
 {% endblock %}

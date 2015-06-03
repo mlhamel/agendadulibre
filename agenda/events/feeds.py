@@ -177,8 +177,7 @@ class UpcomingEventCalendarByRegion (ICalendarFeed):
         end = date.today() + timedelta(days=60)
 
         if self.region is not None:
-            q = (Q(city__region=self.region, scope="L")
-                 | Q(scope="I") | Q(scope="N"))
+            q = Q(city__region=self.region)
         else:
             q = Q()
 
@@ -238,7 +237,7 @@ class LatestEntriesByRegion(LatestEntries):
 
     def items(self, region):
         if region is not None:
-            q = Q(city__region=region, scope="L") | Q(scope="I") | Q(scope="N")
+            q = Q(city__region=region)
         else:
             q = Q()
 
@@ -277,7 +276,7 @@ class UpcomingEntriesByRegion(UpcomingEntries):
 
     def items(self, region=None):
         if region is not None:
-            q = Q(city__region=region, scope="L") | Q(scope="I") | Q(scope="N")
+            q = Q(city__region=region)
         else:
             q = Q()
         return (Event.objects

@@ -28,6 +28,7 @@ from django.db.models import Q
 
 register = template.Library()
 
+
 def get_last_day_of_month(year, month):
     if (month == 12):
         year += 1
@@ -37,26 +38,29 @@ def get_last_day_of_month(year, month):
     return date(year, month, 1) - timedelta(1)
 
 
-def month_cal(year, month, region = None):
+def month_cal(year, month, region=None):
 
     first_day_of_month = date(year, month, 1)
     last_day_of_month = get_last_day_of_month(year, month)
-    first_day_of_calendar = first_day_of_month - timedelta(first_day_of_month.weekday()+1)
-    last_day_of_calendar = last_day_of_month + timedelta(7 - last_day_of_month.weekday())
+    first_day_of_calendar = (first_day_of_month
+                             - timedelta(first_day_of_month.weekday()+1))
+    last_day_of_calendar = (last_day_of_month
+                            + timedelta(7 - last_day_of_month.weekday()))
     print last_day_of_month.isoweekday()
-    today = date.today();
+    today = date.today()
 
-    # Filter local events for given region, include national and international events
-    if region != None:
-      q = Q(city__region=region,scope="L") | Q(scope="I") | Q(scope="N")
+    # Filter local events for given region, include national and
+    # international events
+    if region is not None:
+        q = Q(city__region=region)
     else:
-      q = Q()
+        q = Q()
 
-    event_list = Event.objects.filter (
-        start_time__gte=first_day_of_calendar,
-        end_time__lte=last_day_of_calendar,
-        moderated=True).filter (q)
-
+    event_list = (Event.objects
+                  .filter(start_time__gte=first_day_of_calendar)
+                  .filter(end_time__lte=last_day_of_calendar)
+                  .filter(moderated=True)
+                  .filter(q))
     month_cal = []
     week = []
     week_headers = []
@@ -74,7 +78,7 @@ def month_cal(year, month, region = None):
         day_events = []
         for event in event_list:
             if day >= event.start_time.date() and day <= event.end_time.date():
-                day_events.append (event)
+                day_events.append(event)
 
         cal_day['events'] = day_events
 
