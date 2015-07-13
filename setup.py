@@ -6,7 +6,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 setup(name='agenda',
-      version='1.1.2',
+      version='1.2.0',
       description="",
       long_description="",
       classifiers=[],
