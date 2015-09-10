@@ -3,16 +3,22 @@ from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
-from agenda.events.models import Event
 
+from agenda.lib.geocode import GoogleMapsGeocoder
 
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        for event in Event.objects.all():
-            event._disable_signals = False
-            Event.geocode(Event, event)
+        coder = GoogleMapsGeocoder()
+        for instance in orm.Event.objects.all():
+            try:
+                results = coder.geocode(u"%s %s" % (instance.address, instance.city.name))
+            except Exception:
+                return
+            instance.latitude = results.get("latitude")
+            instance.longitude = results.get("longitude")
+            instance.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
