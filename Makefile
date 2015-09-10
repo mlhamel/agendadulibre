@@ -39,3 +39,6 @@ major:
 	bumpversion major
 minor:
 	bumpversion minor
+
+run:
+	DJANGO_SETTINGS_MODULE=agenda.settings django-admin.py runserver
